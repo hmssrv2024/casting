@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Casting Somos Tu Y Yo - Segunda Fase</title>
+  <title>Casting Somos Tu Y Yo - Primera Fase</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <meta name="description" content="Formulario de casting para la nueva temporada de Somos Tu Y Yo" />
 
-  <link rel="icon" href="https://i.ibb.co/9GJdXs2/favicon.png" type="image/png" />
+  <link rel="icon" href="https://www-somostuyyovv-com.s3.us-west-2.amazonaws.com/public/media/logos/01JJW5SBXM6H8MX0DQ6G656S60.png" type="image/png" />
 
   <!-- Fuentes e Iconos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,6 +68,118 @@
       align-items: flex-start;
       padding: 1rem;
       overflow-x: hidden;
+    }
+
+    /* Estilos para la animación de intro */
+    .intro-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .intro-stage {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.8s ease-in-out;
+    }
+
+    .intro-stage.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .intro-logo {
+      width: 200px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    .intro-text {
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      text-align: center;
+      margin: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .intro-subtext {
+      color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    .intro-stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+      animation: twinkle var(--duration) infinite;
+      opacity: 0;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .intro-continue {
+      margin-top: 40px;
+      padding: 12px 30px;
+      background: white;
+      color: var(--primary);
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      animation: bounce 2s infinite;
+    }
+
+    .intro-continue:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
     }
 
     .container {
@@ -206,7 +318,7 @@
     .progress-bar-fill {
       height: 100%;
       background: var(--gradient-success);
-      width: 40%; /* Progreso inicial */
+      width: 20%; /* Progreso inicial */
       transition: width 0.6s ease-in-out;
       border-radius: var(--border-radius);
       position: relative;
@@ -1076,51 +1188,16 @@
       pointer-events: none;
     }
 
-    /* Juego de memoria para la sección adicional */
-    .memory-game {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin: 1rem 0;
-    }
-    
-    .memory-card {
-      height: 80px;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.5s;
-      cursor: pointer;
-    }
-    
-    .memory-card.flipped {
-      transform: rotateY(180deg);
-    }
-    
-    .memory-card-front, .memory-card-back {
+    /* Frame para la segunda fase */
+    .phase-two-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      position: absolute;
-      backface-visibility: hidden;
-      border-radius: var(--border-radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .memory-card-front {
-      background: var(--gradient-primary);
-      transform: rotateY(180deg);
-      font-size: 1.5rem;
-      color: white;
-    }
-    
-    .memory-card-back {
-      background: var(--gradient-blue-teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: white;
+      z-index: 9999;
+      background: white;
+      display: none;
     }
 
     /* Responsive Design */
@@ -1160,6 +1237,15 @@
       
       .character-option {
         width: 100%;
+      }
+
+      .intro-text {
+        font-size: 1.5rem;
+      }
+
+      .intro-subtext {
+        font-size: 1rem;
+        padding: 0 1rem;
       }
     }
     
@@ -1218,14 +1304,294 @@
         flex-wrap: wrap;
         justify-content: center;
       }
-      
-      .memory-game {
-        grid-template-columns: repeat(3, 1fr);
+
+      .intro-text {
+        font-size: 1.3rem;
+      }
+
+      .intro-subtext {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+      }
+    }
+
+    /* Animación de elementos flotantes para la intro */
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: 0.6;
+      animation: float 15s infinite ease-in-out;
+    }
+
+    .floating-element:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      font-size: 3rem;
+      animation-delay: 0s;
+      animation-duration: 15s;
+    }
+
+    .floating-element:nth-child(2) {
+      top: 15%;
+      right: 10%;
+      font-size: 2.5rem;
+      animation-delay: 1s;
+      animation-duration: 18s;
+    }
+
+    .floating-element:nth-child(3) {
+      bottom: 15%;
+      left: 15%;
+      font-size: 3.5rem;
+      animation-delay: 2s;
+      animation-duration: 20s;
+    }
+
+    .floating-element:nth-child(4) {
+      bottom: 20%;
+      right: 15%;
+      font-size: 2.8rem;
+      animation-delay: 3s;
+      animation-duration: 17s;
+    }
+
+    .floating-element:nth-child(5) {
+      top: 40%;
+      left: 20%;
+      font-size: 3.2rem;
+      animation-delay: 4s;
+      animation-duration: 19s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-15px) rotate(5deg);
+      }
+      50% {
+        transform: translateY(0) rotate(0deg);
+      }
+      75% {
+        transform: translateY(15px) rotate(-5deg);
+      }
+    }
+
+    /* Estilos para el reproductor de vídeo */
+    .intro-video-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      z-index: -2;
+    }
+
+    .intro-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(26, 31, 113, 0.7);
+      z-index: -1;
+    }
+
+    .phase-indicator {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .phase-indicator i {
+      color: #fcd34d;
+    }
+
+    /* Estilo para la tarjeta de primera fase completada */
+    .phase-complete-card {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      border-radius: var(--border-radius-lg);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      margin: 2rem 0 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phase-complete-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/mGr07f3/pattern.png');
+      background-size: cover;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .phase-complete-icon {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .phase-complete-icon i {
+      font-size: 4rem;
+      color: #4f46e5;
+    }
+
+    .phase-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #fcd34d;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .phase-complete-card h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .phase-complete-card p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .next-phase-btn {
+      background: white;
+      color: #4f46e5;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .next-phase-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .celebration-emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: rise 4s forwards ease-out;
+      opacity: 0;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px);
+        opacity: 0;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Animación de Intro -->
+  <div class="intro-animation" id="introAnimation">
+    <div class="intro-video-container">
+      <div class="intro-video-overlay"></div>
+    </div>
+    
+    <div class="floating-elements">
+      <div class="floating-element">🎭</div>
+      <div class="floating-element">🎬</div>
+      <div class="floating-element">🎵</div>
+      <div class="floating-element">💃</div>
+      <div class="floating-element">🎤</div>
+    </div>
+    
+    <div class="intro-stars" id="introStars"></div>
+    
+    <div class="intro-stage active" id="introStage1">
+      <img src="https://www-somostuyyovv-com.s3.us-west-2.amazonaws.com/public/media/logos/01JJW5SBXM6H8MX0DQ6G656S60.png" alt="Somos Tu Y Yo" class="intro-logo">
+      <h1 class="intro-text">¡El momento ha llegado!</h1>
+      <p class="intro-subtext">Estamos buscando nuevos talentos para la próxima temporada de Somos Tu Y Yo</p>
+      <button class="intro-continue" onclick="nextIntroStage(1)">Continuar</button>
+    </div>
+    
+    <div class="intro-stage" id="introStage2">
+      <div class="phase-indicator">
+        <i class="fas fa-star"></i> Casting Oficial
+      </div>
+      <h1 class="intro-text">¿Tienes el talento?</h1>
+      <p class="intro-subtext">Buscamos jóvenes talentosos con pasión por la actuación, el canto y el baile. ¡Si siempre has soñado con formar parte de Somos Tu Y Yo, esta es tu oportunidad!</p>
+      <button class="intro-continue" onclick="nextIntroStage(2)">Quiero participar</button>
+    </div>
+    
+    <div class="intro-stage" id="introStage3">
+      <h1 class="intro-text">¿Cómo funciona?</h1>
+      <p class="intro-subtext">El proceso de casting consta de dos fases. Primero completarás un formulario con tus datos e información sobre tus talentos. Los seleccionados pasarán a la segunda fase para una evaluación más detallada.</p>
+      <button class="intro-continue" onclick="nextIntroStage(3)">Comenzar ahora</button>
+    </div>
+  </div>
+
   <!-- Loading overlay -->
   <div class="loading-overlay" id="loadingOverlay">
     <div style="text-align: center;">
@@ -1252,8 +1618,8 @@
     <!-- Header -->
     <div class="header">
       <img src="https://www-somostuyyovv-com.s3.us-west-2.amazonaws.com/public/media/logos/01JJW5SBXM6H8MX0DQ6G656S60.png" alt="Somos Tu Y Yo" class="header-logo">
-      <h1>Casting Segunda Fase</h1>
-      <p>¡Felicidades por avanzar! Ayúdanos a conocerte mejor completando estas preguntas adicionales.</p>
+      <h1>Casting Primera Fase</h1>
+      <p>¡Tu oportunidad de brillar! Completa este formulario para iniciar tu camino hacia Somos Tu Y Yo.</p>
     </div>
 
     <!-- Progress Bar -->
@@ -1261,7 +1627,7 @@
       <div class="progress-bar">
         <div class="progress-bar-fill" id="progressBar" style="width: 20%;"></div>
       </div>
-      <div class="progress-text">Fase 2: Paso <span id="currentStep">1</span> de 5</div>
+      <div class="progress-text">Fase 1: Paso <span id="currentStep">1</span> de 5</div>
     </div>
 
     <!-- Form Container -->
@@ -1288,7 +1654,7 @@
 
       <!-- Section 1: Personalidad y Creatividad -->
       <div class="form-section active" id="section1">
-        <h2 class="section-title"><i class="fas fa-star"></i> Personalidad y Creatividad</h2>
+        <h2 class="section-title"><i class="fas fa-star"></i> Información Personal</h2>
         
         <div class="form-group">
           <label class="form-label">¿Cuál es tu nombre completo?</label>
@@ -1298,8 +1664,8 @@
         
         <div class="form-group">
           <label class="form-label">¿Cuántos años tienes?</label>
-          <input type="number" class="form-control" id="edad" placeholder="Ingresa tu edad" min="13" max="30">
-          <div class="error-message" id="edad-error">Por favor, ingresa una edad válida entre 13 y 30 años.</div>
+          <input type="number" class="form-control" id="edad" placeholder="Ingresa tu edad" min="15" max="30">
+          <div class="error-message" id="edad-error">Por favor, ingresa una edad válida entre 15 y 30 años.</div>
         </div>
         
         <div class="form-group">
@@ -1309,21 +1675,21 @@
         </div>
         
         <div class="form-group">
-          <label class="form-label">Resume tus talentos principales (separados por coma)</label>
-          <input type="text" class="form-control" id="talentos" placeholder="Ej.: Canto, baile, actuación...">
-          <div class="error-message" id="talentos-error">Por favor, indica al menos un talento.</div>
+          <label class="form-label">¿En qué ciudad vives actualmente?</label>
+          <input type="text" class="form-control" id="ciudad" placeholder="Nombre de tu ciudad actual">
+          <div class="error-message" id="ciudad-error">Por favor, indica tu ciudad de residencia.</div>
         </div>
         
         <div class="form-group">
-          <label class="form-label">¿Cuál es tu mayor fortaleza como artista?</label>
-          <textarea class="form-control" id="fortaleza" placeholder="Describe tu mayor talento o habilidad con detalle"></textarea>
-          <div class="error-message" id="fortaleza-error">Por favor, describe tu fortaleza con más detalle (mínimo 20 palabras).</div>
+          <label class="form-label">Correo electrónico de contacto</label>
+          <input type="email" class="form-control" id="email" placeholder="tucorreo@ejemplo.com">
+          <div class="error-message" id="email-error">Por favor, ingresa un correo electrónico válido.</div>
         </div>
         
         <div class="form-group">
-          <label class="form-label">¿Qué te inspira a crear o actuar?</label>
-          <textarea class="form-control" id="inspiracion" placeholder="Cuéntanos qué te motiva o inspira a desarrollar tu arte..."></textarea>
-          <div class="error-message" id="inspiracion-error">Por favor, elabora más tu respuesta (mínimo 20 palabras).</div>
+          <label class="form-label">Número de teléfono (con código de país)</label>
+          <input type="text" class="form-control" id="telefono" placeholder="Ej.: +58 4141234567">
+          <div class="error-message" id="telefono-error">Por favor, ingresa un número de teléfono válido.</div>
         </div>
         
         <div class="btn-container">
@@ -1343,65 +1709,79 @@
         </div>
       </div>
 
-      <!-- Section 2: Habilidades y Creatividad -->
+      <!-- Section 2: Experiencia Artística -->
       <div class="form-section section-2" id="section2">
-        <h2 class="section-title"><i class="fas fa-lightbulb"></i> Habilidades y Creatividad</h2>
+        <h2 class="section-title"><i class="fas fa-music"></i> Experiencia Artística</h2>
         
         <div class="form-group">
-          <label class="form-label">¿Cómo manejas la presión en situaciones de estrés?</label>
-          <div class="emoji-scale">
-            <div class="emoji-item">
-              <span class="emoji" data-value="1" onclick="selectEmoji(this)">😰</span>
-              <span>Me bloqueo</span>
-            </div>
-            <div class="emoji-item">
-              <span class="emoji" data-value="2" onclick="selectEmoji(this)">😟</span>
-              <span>Me cuesta</span>
-            </div>
-            <div class="emoji-item">
-              <span class="emoji" data-value="3" onclick="selectEmoji(this)">😐</span>
-              <span>Normal</span>
-            </div>
-            <div class="emoji-item">
-              <span class="emoji" data-value="4" onclick="selectEmoji(this)">😊</span>
-              <span>Bien</span>
-            </div>
-            <div class="emoji-item">
-              <span class="emoji" data-value="5" onclick="selectEmoji(this)">😎</span>
-              <span>Excelente</span>
-            </div>
+          <label class="form-label">¿Qué talentos artísticos posees? (selecciona todos los que apliquen)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="talentos[]" value="Actuación"> Actuación
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="talentos[]" value="Canto"> Canto
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="talentos[]" value="Baile"> Baile
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="talentos[]" value="Instrumento musical"> Instrumento musical
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="talentos[]" value="Composición"> Composición
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="talentos[]" value="Otro"> Otro
+            </label>
           </div>
-          <input type="hidden" id="presion_valor">
-          <div class="error-message" id="presion-error">Por favor, selecciona una opción.</div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">¿Qué cualidad única aportarías al show?</label>
-          <textarea class="form-control" id="cualidad_unica" placeholder="¿Qué te hace especial y diferente? Sé específico/a."></textarea>
-          <div class="error-message" id="cualidad-error">Por favor, describe tu cualidad única con más detalle (mínimo 20 palabras).</div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">¿Has enfrentado el miedo escénico? ¿Cómo lo superaste?</label>
-          <textarea class="form-control" id="miedo_escenico" placeholder="Comparte tu experiencia y las técnicas que utilizaste para superar el miedo..."></textarea>
-          <div class="error-message" id="miedo-error">Por favor, elabora más tu respuesta (mínimo 20 palabras).</div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Si pudieras elegir un color que represente tu personalidad, ¿cuál sería y por qué?</label>
-          <div class="color-picker">
-            <div class="color-option" style="background-color: #e53935;" data-color="Rojo" onclick="selectColor(this)"></div>
-            <div class="color-option" style="background-color: #FB8C00;" data-color="Naranja" onclick="selectColor(this)"></div>
-            <div class="color-option" style="background-color: #FDD835;" data-color="Amarillo" onclick="selectColor(this)"></div>
-            <div class="color-option" style="background-color: #43A047;" data-color="Verde" onclick="selectColor(this)"></div>
-            <div class="color-option" style="background-color: #1E88E5;" data-color="Azul" onclick="selectColor(this)"></div>
-            <div class="color-option" style="background-color: #5E35B1;" data-color="Violeta" onclick="selectColor(this)"></div>
-            <div class="color-option" style="background-color: #D81B60;" data-color="Rosa" onclick="selectColor(this)"></div>
-            <div class="color-option" style="background-color: #4E342E;" data-color="Marrón" onclick="selectColor(this)"></div>
+          <div class="conditional-question" id="talento_otro_container">
+            <input type="text" class="form-control" id="talento_otro" placeholder="¿Qué otro talento posees?">
           </div>
-          <input type="hidden" id="color_personalidad">
-          <textarea class="form-control" id="color_razon" placeholder="Explica por qué elegiste este color..." style="margin-top:0.75rem;"></textarea>
-          <div class="error-message" id="color-error">Por favor, selecciona un color y explica tu elección (mínimo 20 palabras).</div>
+          <div class="error-message" id="talentos-error">Por favor, selecciona al menos un talento.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Has tenido experiencia previa en televisión, teatro o música?</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="experiencia_previa" value="Sí, profesionalmente"> Sí, profesionalmente
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="experiencia_previa" value="Sí, amateur"> Sí, amateur
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="experiencia_previa" value="Solo en escuela/academia"> Solo en escuela/academia
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="experiencia_previa" value="No tengo experiencia"> No tengo experiencia
+            </label>
+          </div>
+          <div class="error-message" id="experiencia-error">Por favor, selecciona una opción.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Si tienes experiencia, descríbela brevemente</label>
+          <textarea class="form-control" id="experiencia_detalle" placeholder="Menciona proyectos, roles, academias o cualquier experiencia relevante..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Has recibido formación formal en alguna disciplina artística?</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="formacion" value="Sí, en una academia"> Sí, en una academia
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="formacion" value="Sí, clases particulares"> Sí, clases particulares
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="formacion" value="Sí, autodidacta"> Sí, autodidacta
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="formacion" value="No"> No
+            </label>
+          </div>
+          <div class="error-message" id="formacion-error">Por favor, selecciona una opción.</div>
         </div>
         
         <div class="btn-container">
@@ -1433,45 +1813,31 @@
         </div>
       </div>
 
-      <!-- Section 3: Conexión con la Serie -->
+      <!-- Section 3: Conocimiento sobre el Programa -->
       <div class="form-section section-3" id="section3">
-        <h2 class="section-title"><i class="fas fa-tv"></i> Conexión con la Serie</h2>
+        <h2 class="section-title"><i class="fas fa-tv"></i> Sobre Somos Tu Y Yo</h2>
         
         <div class="form-group">
-          <label class="form-label">¿Cuál fue tu escena favorita de Somos Tu Y Yo?</label>
-          <textarea class="form-control" id="escena_favorita" placeholder="Describe tu escena favorita con detalle y explica por qué te impactó..."></textarea>
-          <div class="error-message" id="escena-error">Por favor, describe tu escena favorita con más detalle (mínimo 20 palabras).</div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">¿Cuántas estrellas le darías a la serie?
-            <div class="tooltip"><i class="fas fa-info-circle"></i>
-              <span class="tooltip-text">Califica de 1 a 5 estrellas donde 5 es la mejor calificación.</span>
-            </div>
-          </label>
-          <div class="star-rating">
-            <input type="radio" id="star5" name="rating" value="5" />
-            <label for="star5"><i class="fas fa-star"></i></label>
-            <input type="radio" id="star4" name="rating" value="4" />
-            <label for="star4"><i class="fas fa-star"></i></label>
-            <input type="radio" id="star3" name="rating" value="3" />
-            <label for="star3"><i class="fas fa-star"></i></label>
-            <input type="radio" id="star2" name="rating" value="2" />
-            <label for="star2"><i class="fas fa-star"></i></label>
-            <input type="radio" id="star1" name="rating" value="1" />
-            <label for="star1"><i class="fas fa-star"></i></label>
+          <label class="form-label">¿Qué tanto conoces el programa Somos Tu Y Yo?</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_programa" value="Lo conozco muy bien"> Lo conozco muy bien
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_programa" value="Lo conozco bastante"> Lo conozco bastante
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_programa" value="Lo conozco algo"> Lo conozco algo
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_programa" value="Lo conozco poco"> Lo conozco poco
+            </label>
           </div>
-          <div class="error-message" id="rating-error">Por favor, califica la serie.</div>
+          <div class="error-message" id="conocimiento-error">Por favor, selecciona una opción.</div>
         </div>
         
         <div class="form-group">
-          <label class="form-label">Si pudieras crear un personaje nuevo para la serie, ¿cómo sería?</label>
-          <textarea class="form-control" id="nuevo_personaje" placeholder="Describe el personaje que te gustaría interpretar, su personalidad, historia, sueños..."></textarea>
-          <div class="error-message" id="personaje-error">Por favor, describe tu personaje con más detalle (mínimo 20 palabras).</div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">¿Con qué personaje de la serie te identificas más?</label>
+          <label class="form-label">¿Quién es tu personaje favorito de Somos Tu Y Yo?</label>
           <div class="character-selector">
             <div class="character-option" onclick="selectCharacter(this, 'Sheryl Rubio')" data-character="Sheryl Rubio">
               <div class="character-img" style="background-color: #FFC0CB; display: flex; justify-content: center; align-items: center;">SR</div>
@@ -1509,12 +1875,23 @@
               <div class="character-role">Especificar</div>
             </div>
           </div>
-          <input type="hidden" id="personaje_identificado">
+          <input type="hidden" id="personaje_favorito">
           <div class="conditional-question" id="personaje_otro_container">
             <input type="text" class="form-control" id="personaje_otro" placeholder="Especifica el personaje">
           </div>
-          <textarea class="form-control" id="personaje_razon" placeholder="Explica por qué te identificas con este personaje..." style="margin-top:0.75rem;"></textarea>
-          <div class="error-message" id="personaje-identificado-error">Por favor, selecciona un personaje y explica con más detalle por qué te identificas (mínimo 20 palabras).</div>
+          <div class="error-message" id="personaje-error">Por favor, selecciona un personaje.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Por qué quieres formar parte de Somos Tu Y Yo?</label>
+          <textarea class="form-control" id="motivacion" placeholder="Cuéntanos tu motivación para participar..."></textarea>
+          <div class="error-message" id="motivacion-error">Por favor, comparte tu motivación (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Qué aportarías al programa si fueras seleccionado/a?</label>
+          <textarea class="form-control" id="aporte" placeholder="Describe qué cualidades o talentos especiales aportarías..."></textarea>
+          <div class="error-message" id="aporte-error">Por favor, describe tu aporte (mínimo 20 palabras).</div>
         </div>
         
         <div class="btn-container">
@@ -1546,97 +1923,73 @@
         </div>
       </div>
 
-      <!-- Section 4: Desafíos y Habilidades -->
+      <!-- Section 4: Redes Sociales -->
       <div class="form-section section-4" id="section4">
-        <h2 class="section-title"><i class="fas fa-trophy"></i> Desafíos y Habilidades</h2>
+        <h2 class="section-title"><i class="fas fa-hashtag"></i> Redes Sociales</h2>
         
         <div class="form-group">
-          <label class="form-label">Cuéntanos sobre un desafío artístico que hayas superado y qué aprendiste de él</label>
-          <textarea class="form-control" id="desafio_superado" placeholder="Describe una situación difícil relacionada con tu carrera artística que superaste..."></textarea>
-          <div class="error-message" id="desafio-error">Por favor, comparte un desafío con más detalle (mínimo 20 palabras).</div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">¿Qué tanto te consideras bueno para improvisar?</label>
-          <div class="range-container">
-            <input type="range" min="1" max="10" value="5" class="range-slider" id="improvisacion_valor" oninput="updateRangeValue(this)">
-            <div class="range-labels">
-              <span>Principiante</span>
-              <span>Intermedio</span>
-              <span>Experto</span>
-            </div>
-            <div class="range-value">5</div>
+          <label class="form-label">¿En qué redes sociales tienes presencia? (selecciona todas las que apliquen)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="redes[]" value="Instagram"> Instagram
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="redes[]" value="TikTok"> TikTok
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="redes[]" value="YouTube"> YouTube
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="redes[]" value="Facebook"> Facebook
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="redes[]" value="Twitter"> Twitter
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="redes[]" value="Otra"> Otra
+            </label>
           </div>
+          <div class="conditional-question" id="red_otra_container">
+            <input type="text" class="form-control" id="red_otra" placeholder="¿Qué otra red social usas?">
+          </div>
+          <div class="error-message" id="redes-error">Por favor, selecciona al menos una red social.</div>
         </div>
         
         <div class="form-group">
-          <label class="form-label">¿Qué habilidad artística te gustaría desarrollar más?</label>
+          <label class="form-label">Usuario de Instagram (sin @)</label>
+          <input type="text" class="form-control" id="instagram" placeholder="Ej.: tuusuario">
+          <div class="form-helper">Deja en blanco si no tienes Instagram</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Usuario de TikTok (sin @)</label>
+          <input type="text" class="form-control" id="tiktok" placeholder="Ej.: tuusuario">
+          <div class="form-helper">Deja en blanco si no tienes TikTok</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Tienes videos o contenido donde muestres tu talento en redes sociales?</label>
           <div class="radio-group">
             <label class="radio-item">
-              <input type="radio" name="habilidad_desarrollar" value="Actuación"> Actuación
+              <input type="radio" name="contenido_redes" value="Sí, bastante"> Sí, bastante
             </label>
             <label class="radio-item">
-              <input type="radio" name="habilidad_desarrollar" value="Canto"> Canto
+              <input type="radio" name="contenido_redes" value="Sí, algo"> Sí, algo
             </label>
             <label class="radio-item">
-              <input type="radio" name="habilidad_desarrollar" value="Baile"> Baile
+              <input type="radio" name="contenido_redes" value="Muy poco"> Muy poco
             </label>
             <label class="radio-item">
-              <input type="radio" name="habilidad_desarrollar" value="Instrumento musical"> Instrumento musical
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="habilidad_desarrollar" value="Otro"> Otro
+              <input type="radio" name="contenido_redes" value="No"> No
             </label>
           </div>
-          <div class="conditional-question" id="habilidad_otra_container">
-            <input type="text" class="form-control" id="habilidad_otra" placeholder="Especifica qué habilidad te gustaría desarrollar">
-          </div>
-          <textarea class="form-control" id="habilidad_razon" placeholder="Explica por qué quieres desarrollar esta habilidad y cómo te ayudaría..." style="margin-top:0.75rem;"></textarea>
-          <div class="error-message" id="habilidad-error">Por favor, selecciona una habilidad y explica con más detalle por qué quieres desarrollarla (mínimo 20 palabras).</div>
+          <div class="error-message" id="contenido-error">Por favor, selecciona una opción.</div>
         </div>
         
         <div class="form-group">
-          <label class="form-label">¿Cuál es tu canción favorita para interpretar?</label>
-          <input type="text" class="form-control" id="cancion_favorita" placeholder="Nombre de la canción y artista">
-          <textarea class="form-control" id="cancion_razon" placeholder="¿Por qué elegiste esta canción? ¿Qué significa para ti?" style="margin-top:0.75rem;"></textarea>
-          <div class="form-helper">Si te seleccionamos, podrías interpretarla en la próxima fase</div>
-          <div class="error-message" id="cancion-error">Por favor, indica tu canción favorita y explica tu elección con más detalle (mínimo 20 palabras).</div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">¿Qué sentimiento te transmite la música cuando actúas o bailas?</label>
-          <div class="feeling-selector">
-            <div class="feeling-option" onclick="selectFeeling(this, 'Libertad')">
-              <div class="feeling-emoji">🦅</div>
-              <div class="feeling-label">Libertad</div>
-            </div>
-            <div class="feeling-option" onclick="selectFeeling(this, 'Alegría')">
-              <div class="feeling-emoji">😄</div>
-              <div class="feeling-label">Alegría</div>
-            </div>
-            <div class="feeling-option" onclick="selectFeeling(this, 'Poder')">
-              <div class="feeling-emoji">💪</div>
-              <div class="feeling-label">Poder</div>
-            </div>
-            <div class="feeling-option" onclick="selectFeeling(this, 'Paz')">
-              <div class="feeling-emoji">☮️</div>
-              <div class="feeling-label">Paz</div>
-            </div>
-            <div class="feeling-option" onclick="selectFeeling(this, 'Pasión')">
-              <div class="feeling-emoji">❤️</div>
-              <div class="feeling-label">Pasión</div>
-            </div>
-            <div class="feeling-option" onclick="selectFeeling(this, 'Otro')">
-              <div class="feeling-emoji">✨</div>
-              <div class="feeling-label">Otro</div>
-            </div>
-          </div>
-          <input type="hidden" id="sentimiento_valor">
-          <div class="conditional-question" id="sentimiento_otro_container">
-            <input type="text" class="form-control" id="sentimiento_otro" placeholder="Especifica el sentimiento">
-          </div>
-          <textarea class="form-control" id="sentimiento_explicacion" placeholder="Explica cómo este sentimiento influye en tu interpretación..." style="margin-top:0.75rem;"></textarea>
-          <div class="error-message" id="sentimiento-error">Por favor, selecciona un sentimiento y explícalo con más detalle (mínimo 20 palabras).</div>
+          <label class="form-label">Si tienes algún video destacado, comparte el enlace</label>
+          <input type="url" class="form-control" id="enlace_video" placeholder="https://www.ejemplo.com/tu-video">
+          <div class="form-helper">Puede ser de Instagram, TikTok, YouTube, etc.</div>
         </div>
         
         <div class="btn-container">
@@ -1668,9 +2021,9 @@
         </div>
       </div>
 
-      <!-- Section 5: Compromiso y Disponibilidad -->
+      <!-- Section 5: Disponibilidad y Comentarios Finales -->
       <div class="form-section section-5" id="section5">
-        <h2 class="section-title"><i class="fas fa-calendar-check"></i> Compromiso y Disponibilidad</h2>
+        <h2 class="section-title"><i class="fas fa-calendar-check"></i> Disponibilidad y Comentarios</h2>
         
         <div class="form-group">
           <label class="form-label">¿Estarías dispuesto/a a cambiar tu apariencia (corte de pelo, color, etc.) para un papel?</label>
@@ -1688,41 +2041,11 @@
               <input type="radio" name="cambio_apariencia" value="No"> No
             </label>
           </div>
-          <textarea class="form-control" id="apariencia_razon" placeholder="Explica tu respuesta..." style="margin-top:0.75rem;"></textarea>
-          <div class="error-message" id="apariencia-error">Por favor, selecciona una opción y explica tu respuesta con más detalle (mínimo 20 palabras).</div>
+          <div class="error-message" id="apariencia-error">Por favor, selecciona una opción.</div>
         </div>
         
         <div class="form-group">
-          <label class="form-label">¿Qué días de la semana tienes mayor disponibilidad?</label>
-          <div class="checkbox-group">
-            <label class="checkbox-item">
-              <input type="checkbox" name="disponibilidad[]" value="Lunes"> Lunes
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="disponibilidad[]" value="Martes"> Martes
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="disponibilidad[]" value="Miércoles"> Miércoles
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="disponibilidad[]" value="Jueves"> Jueves
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="disponibilidad[]" value="Viernes"> Viernes
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="disponibilidad[]" value="Sábado"> Sábado
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" name="disponibilidad[]" value="Domingo"> Domingo
-            </label>
-          </div>
-          <textarea class="form-control" id="disponibilidad_detalles" placeholder="Especifica horarios preferidos y cualquier detalle adicional sobre tu disponibilidad..." style="margin-top:0.75rem;"></textarea>
-          <div class="error-message" id="disponibilidad-error">Por favor, selecciona al menos un día y proporciona más detalles sobre tu disponibilidad (mínimo 20 palabras).</div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">¿Podrías mudarte temporalmente por el proyecto si fuera necesario?</label>
+          <label class="form-label">¿Podrías mudarte temporalmente si fuera necesario para el proyecto?</label>
           <div class="radio-group">
             <label class="radio-item">
               <input type="radio" name="mudanza" value="Sí, sin problema"> Sí, sin problema
@@ -1737,20 +2060,44 @@
               <input type="radio" name="mudanza" value="No podría"> No podría
             </label>
           </div>
-          <textarea class="form-control" id="mudanza_razon" placeholder="Explica tu respuesta..." style="margin-top:0.75rem;"></textarea>
-          <div class="error-message" id="mudanza-error">Por favor, selecciona una opción y explica tu respuesta con más detalle (mínimo 20 palabras).</div>
+          <div class="error-message" id="mudanza-error">Por favor, selecciona una opción.</div>
         </div>
         
         <div class="form-group">
-          <label class="form-label">¿Qué significa para ti formar parte de Somos Tu Y Yo?</label>
-          <textarea class="form-control" id="significado_proyecto" placeholder="Explica lo que representaría para ti ser parte del elenco..."></textarea>
-          <div class="error-message" id="significado-error">Por favor, explica lo que significaría para ti con más detalle (mínimo 20 palabras).</div>
+          <label class="form-label">¿Cómo te enteraste de este casting?</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_casting" value="Redes sociales oficiales"> Redes sociales oficiales
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_casting" value="Amigos/Familiares"> Amigos/Familiares
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_casting" value="Página web"> Página web
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_casting" value="Televisión"> Televisión
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="conocimiento_casting" value="Otro"> Otro
+            </label>
+          </div>
+          <div class="conditional-question" id="conocimiento_casting_otro_container">
+            <input type="text" class="form-control" id="conocimiento_casting_otro" placeholder="Especifica cómo te enteraste">
+          </div>
+          <div class="error-message" id="conocimiento-casting-error">Por favor, selecciona una opción.</div>
         </div>
         
         <div class="form-group">
-          <label class="form-label">¿Algo más que quieras que sepamos de ti?</label>
+          <label class="form-label">¿Algo más que quieras que sepamos sobre ti?</label>
           <textarea class="form-control" id="comentario_adicional" placeholder="Comparte cualquier información adicional que consideres relevante..."></textarea>
-          <div class="error-message" id="comentario-error">Por favor, proporciona información adicional más detallada (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="checkbox-item">
+            <input type="checkbox" id="terminos"> Acepto los términos y condiciones, y confirmo que toda la información proporcionada es verdadera.
+          </label>
+          <div class="error-message" id="terminos-error">Debes aceptar los términos y condiciones para continuar.</div>
         </div>
         
         <div class="btn-container">
@@ -1784,14 +2131,18 @@
 
       <!-- Success Section -->
       <div class="form-section success-section" id="successSection">
-        <div class="success-card" id="successCard">
-          <div class="success-icon">
-            <i class="fas fa-check"></i>
+        <div class="phase-complete-card" id="phaseCompleteCard">
+          <div class="phase-complete-icon">
+            <i class="fas fa-trophy"></i>
+            <div class="phase-badge">Fase 1</div>
           </div>
-          <h2>¡Solicitud Completada!</h2>
-          <p>¡Gracias por participar en el proceso de casting de Somos Tu Y Yo! Tu información ha sido enviada con éxito.</p>
-          <p>Nuestro equipo de producción revisará tu perfil y los videos enviados. Si eres seleccionado/a, te contactaremos a través del correo o teléfono proporcionado en un plazo de 7 días.</p>
-          <p>¡Mucha suerte y gracias por tu interés!</p>
+          <h2>¡Primera fase completada!</h2>
+          <p>¡Felicidades! Has completado la primera fase del proceso de casting para Somos Tu Y Yo.</p>
+          <p>Ahora debes completar la segunda fase con información más detallada sobre tu talento y personalidad.</p>
+          
+          <button class="next-phase-btn" onclick="goToPhaseTwo()">
+            Continuar a Fase 2 <i class="fas fa-arrow-right"></i>
+          </button>
           
           <div class="social-links">
             <a href="https://www.venevision.com" target="_blank" class="social-link venevision">
@@ -1807,25 +2158,14 @@
               <i class="fab fa-twitter"></i>
             </a>
           </div>
-          
-          <div class="btn-container center">
-            <div class="btn-glow-container" style="width: 180px;">
-              <div class="btn-glow-effect"></div>
-              <button class="btn-glow success" onclick="finishCasting()">
-                <div class="btn-glow-content btn-glow-initial">
-                  Finalizar
-                </div>
-                <div class="btn-glow-content btn-glow-hover">
-                  Finalizar
-                  <i class="fas fa-heart btn-glow-icon"></i>
-                </div>
-              </button>
-            </div>
-          </div>
         </div>
       </div>
-      
     </div>
+  </div>
+
+  <!-- Iframe para la segunda fase -->
+  <div class="phase-two-frame" id="phaseTwoFrame">
+    <iframe data-tally-src="https://tally.so/r/31pp8g?transparentBackground=1" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" title="Fase 2 - Casting Somos Tu Y Yo"></iframe>
   </div>
 
   <script>
@@ -1838,46 +2178,125 @@
       section5: {}
     };
     
+    // Crear estrellas para la animación de intro
+    function createStars() {
+      const starsContainer = document.getElementById('introStars');
+      const starsCount = 100;
+      
+      for (let i = 0; i < starsCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        
+        // Tamaño aleatorio
+        const size = Math.random() * 3;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        
+        // Posición aleatoria
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        star.style.left = `${posX}%`;
+        star.style.top = `${posY}%`;
+        
+        // Duración aleatoria
+        const duration = 3 + Math.random() * 3;
+        star.style.setProperty('--duration', `${duration}s`);
+        
+        // Delay aleatorio
+        const delay = Math.random() * 3;
+        star.style.animationDelay = `${delay}s`;
+        
+        starsContainer.appendChild(star);
+      }
+    }
+    
+    // Navegación entre escenas de intro
+    function nextIntroStage(currentStage) {
+      const currentStageElem = document.getElementById(`introStage${currentStage}`);
+      const nextStageElem = document.getElementById(`introStage${currentStage + 1}`);
+      
+      currentStageElem.classList.remove('active');
+      
+      if (nextStageElem) {
+        setTimeout(() => {
+          nextStageElem.classList.add('active');
+        }, 500);
+      } else {
+        // Finalizar intro y mostrar formulario
+        document.getElementById('introAnimation').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('introAnimation').style.display = 'none';
+          document.getElementById('mainContainer').classList.add('active');
+        }, 1000);
+      }
+    }
+    
     // Mostrar el contenedor con animación
     document.addEventListener('DOMContentLoaded', function() {
-      // Simular carga inicial
-      document.getElementById('loadingOverlay').classList.add('active');
-      
-      setTimeout(function() {
-        document.getElementById('loadingOverlay').classList.remove('active');
-        document.getElementById('mainContainer').classList.add('active');
-      }, 1500);
+      // Crear estrellas para la animación de intro
+      createStars();
       
       // Configurar eventos para inputs condicionales
       setupConditionalInputs();
       
       // Inicializar tooltips
       setupTooltips();
+      
+      // Cargar Tally.so script
+      const tallyScript = document.createElement('script');
+      tallyScript.async = true;
+      tallyScript.src = "https://tally.so/widgets/embed.js";
+      document.head.appendChild(tallyScript);
     });
     
     // Configurar inputs condicionales
     function setupConditionalInputs() {
-      // Personaje "Otro"
-      document.getElementById('personaje_otro_container').addEventListener('input', function() {
-        validateInput(this, 'personaje-identificado-error');
+      // Talento "Otro"
+      const talentosCheckboxes = document.querySelectorAll('input[name="talentos[]"]');
+      talentosCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const talentoOtro = document.getElementById('talento_otro_container');
+          const isOtroChecked = Array.from(talentosCheckboxes).some(cb => cb.value === 'Otro' && cb.checked);
+          
+          if (isOtroChecked) {
+            talentoOtro.classList.add('active');
+          } else {
+            talentoOtro.classList.remove('active');
+          }
+        });
       });
       
-      // Habilidad "Otro"
-      const habilidadRadios = document.querySelectorAll('input[name="habilidad_desarrollar"]');
-      habilidadRadios.forEach(radio => {
+      // Personaje "Otro"
+      document.getElementById('personaje_otro_container').addEventListener('input', function() {
+        validateInput(this, 'personaje-error');
+      });
+      
+      // Red social "Otra"
+      const redesCheckboxes = document.querySelectorAll('input[name="redes[]"]');
+      redesCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const redOtra = document.getElementById('red_otra_container');
+          const isOtraChecked = Array.from(redesCheckboxes).some(cb => cb.value === 'Otra' && cb.checked);
+          
+          if (isOtraChecked) {
+            redOtra.classList.add('active');
+          } else {
+            redOtra.classList.remove('active');
+          }
+        });
+      });
+      
+      // Conocimiento casting "Otro"
+      const conocimientoCastingRadios = document.querySelectorAll('input[name="conocimiento_casting"]');
+      conocimientoCastingRadios.forEach(radio => {
         radio.addEventListener('change', function() {
-          const container = document.getElementById('habilidad_otra_container');
+          const container = document.getElementById('conocimiento_casting_otro_container');
           if (this.value === 'Otro') {
             container.classList.add('active');
           } else {
             container.classList.remove('active');
           }
         });
-      });
-      
-      // Sentimiento "Otro"
-      document.getElementById('sentimiento_otro_container').addEventListener('input', function() {
-        validateInput(this, 'sentimiento-error');
       });
     }
     
@@ -1933,7 +2352,10 @@
       const nombre = document.getElementById('nombre_completo').value;
       const edad = document.getElementById('edad').value;
       const nacionalidad = document.getElementById('nacionalidad').value;
-      const talentos = document.getElementById('talentos').value;
+      
+      // Obtener talentos seleccionados
+      const talentoCheckboxes = document.querySelectorAll('input[name="talentos[]"]:checked');
+      const talentos = Array.from(talentoCheckboxes).map(cb => cb.value).join(', ');
       
       if (nombre) {
         const iniciales = nombre.split(' ').map(n => n[0]).join('').toUpperCase();
@@ -1961,6 +2383,11 @@
         updateUserCard();
       }
       
+      // Si estamos en la sección 2, actualizar la tarjeta de talentos
+      if (currentSection === 2) {
+        updateUserCard();
+      }
+      
       // Actualizar barra de progreso
       const nextStep = currentSection + 1;
       document.getElementById('currentStep').innerText = nextStep;
@@ -1985,11 +2412,17 @@
             nextSectionElem.classList.add('active');
           }, 50);
         } else {
-          // Mostrar sección de éxito
+         // Mostrar sección de éxito
           document.getElementById('successSection').style.display = 'block';
           setTimeout(() => {
             document.getElementById('successSection').classList.add('active');
-            document.getElementById('successCard').classList.add('active');
+            document.getElementById('phaseCompleteCard').classList.add('active');
+            
+            // Lanzar confeti para celebrar la finalización de la primera fase
+            launchConfetti();
+            
+            // Crear emojis de celebración
+            createCelebrationEmojis();
           }, 50);
         }
       }, 800);
@@ -2047,7 +2480,7 @@
       
       // Validación específica por sección
       if (sectionNum === 1) {
-        // Validar Sección 1: Personalidad y Creatividad
+        // Validar Sección 1: Información Personal
         if (!document.getElementById('nombre_completo').value) {
           document.getElementById('nombre_completo').classList.add('error');
           document.getElementById('nombre-error').classList.add('active');
@@ -2055,7 +2488,7 @@
         }
         
         const edad = document.getElementById('edad').value;
-        if (!edad || edad < 13 || edad > 30) {
+        if (!edad || edad < 15 || edad > 30) {
           document.getElementById('edad').classList.add('error');
           document.getElementById('edad-error').classList.add('active');
           isValid = false;
@@ -2067,183 +2500,135 @@
           isValid = false;
         }
         
-        if (!document.getElementById('talentos').value) {
-          document.getElementById('talentos').classList.add('error');
+        if (!document.getElementById('ciudad').value) {
+          document.getElementById('ciudad').classList.add('error');
+          document.getElementById('ciudad-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const email = document.getElementById('email').value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+          document.getElementById('email').classList.add('error');
+          document.getElementById('email-error').classList.add('active');
+          isValid = false;
+        }
+        
+        if (!document.getElementById('telefono').value) {
+          document.getElementById('telefono').classList.add('error');
+          document.getElementById('telefono-error').classList.add('active');
+          isValid = false;
+        }
+      } else if (sectionNum === 2) {
+        // Validar Sección 2: Experiencia Artística
+        const talentosChecked = document.querySelectorAll('input[name="talentos[]"]:checked');
+        if (talentosChecked.length === 0) {
           document.getElementById('talentos-error').classList.add('active');
           isValid = false;
         }
         
-        const fortaleza = document.getElementById('fortaleza').value;
-        if (!fortaleza || !validateTextMinLength(fortaleza, 20) || !validateMeaningfulText(fortaleza)) {
-          document.getElementById('fortaleza').classList.add('error');
-          document.getElementById('fortaleza-error').classList.add('active');
+        // Validar si se seleccionó "Otro" talento pero no se especificó cuál
+        const isOtroTalentoChecked = Array.from(talentosChecked).some(cb => cb.value === 'Otro');
+        if (isOtroTalentoChecked && !document.getElementById('talento_otro').value) {
+          document.getElementById('talento_otro').classList.add('error');
+          document.getElementById('talentos-error').classList.add('active');
           isValid = false;
         }
         
-        const inspiracion = document.getElementById('inspiracion').value;
-        if (!inspiracion || !validateTextMinLength(inspiracion, 20) || !validateMeaningfulText(inspiracion)) {
-          document.getElementById('inspiracion').classList.add('error');
-          document.getElementById('inspiracion-error').classList.add('active');
-          isValid = false;
-        }
-      } else if (sectionNum === 2) {
-        // Validar Sección 2: Habilidades y Creatividad
-        if (!document.getElementById('presion_valor').value) {
-          document.getElementById('presion-error').classList.add('active');
+        if (!document.querySelector('input[name="experiencia_previa"]:checked')) {
+          document.getElementById('experiencia-error').classList.add('active');
           isValid = false;
         }
         
-        const cualidadUnica = document.getElementById('cualidad_unica').value;
-        if (!cualidadUnica || !validateTextMinLength(cualidadUnica, 20) || !validateMeaningfulText(cualidadUnica)) {
-          document.getElementById('cualidad_unica').classList.add('error');
-          document.getElementById('cualidad-error').classList.add('active');
-          isValid = false;
-        }
-        
-        const miedoEscenico = document.getElementById('miedo_escenico').value;
-        if (!miedoEscenico || !validateTextMinLength(miedoEscenico, 20) || !validateMeaningfulText(miedoEscenico)) {
-          document.getElementById('miedo_escenico').classList.add('error');
-          document.getElementById('miedo-error').classList.add('active');
-          isValid = false;
-        }
-        
-        // Validar selección de color y explicación
-        if (!document.getElementById('color_personalidad').value || 
-            !validateTextMinLength(document.getElementById('color_razon').value, 20) ||
-            !validateMeaningfulText(document.getElementById('color_razon').value)) {
-          document.getElementById('color_razon').classList.add('error');
-          document.getElementById('color-error').classList.add('active');
+        if (!document.querySelector('input[name="formacion"]:checked')) {
+          document.getElementById('formacion-error').classList.add('active');
           isValid = false;
         }
       } else if (sectionNum === 3) {
-        // Validar Sección 3: Conexión con la Serie
-        const escenaFavorita = document.getElementById('escena_favorita').value;
-        if (!escenaFavorita || !validateTextMinLength(escenaFavorita, 20) || !validateMeaningfulText(escenaFavorita)) {
-          document.getElementById('escena_favorita').classList.add('error');
-          document.getElementById('escena-error').classList.add('active');
+        // Validar Sección 3: Conocimiento sobre el Programa
+        if (!document.querySelector('input[name="conocimiento_programa"]:checked')) {
+          document.getElementById('conocimiento-error').classList.add('active');
           isValid = false;
         }
         
-        if (!document.querySelector('input[name="rating"]:checked')) {
-          document.getElementById('rating-error').classList.add('active');
-          isValid = false;
-        }
-        
-        const nuevoPersonaje = document.getElementById('nuevo_personaje').value;
-        if (!nuevoPersonaje || !validateTextMinLength(nuevoPersonaje, 20) || !validateMeaningfulText(nuevoPersonaje)) {
-          document.getElementById('nuevo_personaje').classList.add('error');
+        if (!document.getElementById('personaje_favorito').value) {
           document.getElementById('personaje-error').classList.add('active');
           isValid = false;
         }
         
-        const personajeIdentificado = document.getElementById('personaje_identificado').value;
-        const personajeRazon = document.getElementById('personaje_razon').value;
-        
-        if (!personajeIdentificado || !validateTextMinLength(personajeRazon, 20) || !validateMeaningfulText(personajeRazon)) {
-          document.getElementById('personaje_razon').classList.add('error');
-          document.getElementById('personaje-identificado-error').classList.add('active');
+        // Validar si se seleccionó "Otro" personaje pero no se especificó cuál
+        if (document.getElementById('personaje_favorito').value === 'Otro' && !document.getElementById('personaje_otro').value) {
+          document.getElementById('personaje_otro').classList.add('error');
+          document.getElementById('personaje-error').classList.add('active');
           isValid = false;
         }
         
-        if (personajeIdentificado === 'Otro' && !document.getElementById('personaje_otro').value) {
-          document.getElementById('personaje_otro').classList.add('error');
-          document.getElementById('personaje-identificado-error').classList.add('active');
+        const motivacion = document.getElementById('motivacion').value;
+        if (!motivacion || !validateTextMinLength(motivacion, 20) || !validateMeaningfulText(motivacion)) {
+          document.getElementById('motivacion').classList.add('error');
+          document.getElementById('motivacion-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const aporte = document.getElementById('aporte').value;
+        if (!aporte || !validateTextMinLength(aporte, 20) || !validateMeaningfulText(aporte)) {
+          document.getElementById('aporte').classList.add('error');
+          document.getElementById('aporte-error').classList.add('active');
           isValid = false;
         }
       } else if (sectionNum === 4) {
-        // Validar Sección 4: Desafíos y Habilidades
-        const desafioSuperado = document.getElementById('desafio_superado').value;
-        if (!desafioSuperado || !validateTextMinLength(desafioSuperado, 20) || !validateMeaningfulText(desafioSuperado)) {
-          document.getElementById('desafio_superado').classList.add('error');
-          document.getElementById('desafio-error').classList.add('active');
+        // Validar Sección 4: Redes Sociales
+        const redesChecked = document.querySelectorAll('input[name="redes[]"]:checked');
+        if (redesChecked.length === 0) {
+          document.getElementById('redes-error').classList.add('active');
           isValid = false;
         }
         
-        const habilidadChecked = document.querySelector('input[name="habilidad_desarrollar"]:checked');
-        const habilidadRazon = document.getElementById('habilidad_razon').value;
-        
-        if (!habilidadChecked || !validateTextMinLength(habilidadRazon, 20) || !validateMeaningfulText(habilidadRazon)) {
-          document.getElementById('habilidad_razon').classList.add('error');
-          document.getElementById('habilidad-error').classList.add('active');
+        // Validar si se seleccionó "Otra" red pero no se especificó cuál
+        const isOtraRedChecked = Array.from(redesChecked).some(cb => cb.value === 'Otra');
+        if (isOtraRedChecked && !document.getElementById('red_otra').value) {
+          document.getElementById('red_otra').classList.add('error');
+          document.getElementById('redes-error').classList.add('active');
           isValid = false;
         }
         
-        if (habilidadChecked && habilidadChecked.value === 'Otro' && !document.getElementById('habilidad_otra').value) {
-          document.getElementById('habilidad_otra').classList.add('error');
-          document.getElementById('habilidad-error').classList.add('active');
-          isValid = false;
-        }
-        
-        const cancionFavorita = document.getElementById('cancion_favorita').value;
-        const cancionRazon = document.getElementById('cancion_razon').value;
-        
-        if (!cancionFavorita || !validateTextMinLength(cancionRazon, 20) || !validateMeaningfulText(cancionRazon)) {
-          document.getElementById('cancion_favorita').classList.add('error');
-          document.getElementById('cancion_razon').classList.add('error');
-          document.getElementById('cancion-error').classList.add('active');
-          isValid = false;
-        }
-        
-        const sentimientoValor = document.getElementById('sentimiento_valor').value;
-        const sentimientoExplicacion = document.getElementById('sentimiento_explicacion').value;
-        
-        if (!sentimientoValor || !validateTextMinLength(sentimientoExplicacion, 20) || !validateMeaningfulText(sentimientoExplicacion)) {
-          document.getElementById('sentimiento_explicacion').classList.add('error');
-          document.getElementById('sentimiento-error').classList.add('active');
-          isValid = false;
-        }
-        
-        if (sentimientoValor === 'Otro' && !document.getElementById('sentimiento_otro').value) {
-          document.getElementById('sentimiento_otro').classList.add('error');
-          document.getElementById('sentimiento-error').classList.add('active');
+        if (!document.querySelector('input[name="contenido_redes"]:checked')) {
+          document.getElementById('contenido-error').classList.add('active');
           isValid = false;
         }
       } else if (sectionNum === 5) {
-        // Validar Sección 5: Compromiso y Disponibilidad
-        const aparienciaChecked = document.querySelector('input[name="cambio_apariencia"]:checked');
-        const aparienciaRazon = document.getElementById('apariencia_razon').value;
-        
-        if (!aparienciaChecked || !validateTextMinLength(aparienciaRazon, 20) || !validateMeaningfulText(aparienciaRazon)) {
-          document.getElementById('apariencia_razon').classList.add('error');
+        // Validar Sección 5: Disponibilidad y Comentarios
+        if (!document.querySelector('input[name="cambio_apariencia"]:checked')) {
           document.getElementById('apariencia-error').classList.add('active');
           isValid = false;
         }
         
-        const disponibilidadChecked = document.querySelectorAll('input[name="disponibilidad[]"]:checked');
-        const disponibilidadDetalles = document.getElementById('disponibilidad_detalles').value;
-        
-        if (disponibilidadChecked.length === 0 || !validateTextMinLength(disponibilidadDetalles, 20) || !validateMeaningfulText(disponibilidadDetalles)) {
-          document.getElementById('disponibilidad_detalles').classList.add('error');
-          document.getElementById('disponibilidad-error').classList.add('active');
-          isValid = false;
-        }
-        
-        const mudanzaChecked = document.querySelector('input[name="mudanza"]:checked');
-        const mudanzaRazon = document.getElementById('mudanza_razon').value;
-        
-        if (!mudanzaChecked || !validateTextMinLength(mudanzaRazon, 20) || !validateMeaningfulText(mudanzaRazon)) {
-          document.getElementById('mudanza_razon').classList.add('error');
+        if (!document.querySelector('input[name="mudanza"]:checked')) {
           document.getElementById('mudanza-error').classList.add('active');
           isValid = false;
         }
         
-        const significadoProyecto = document.getElementById('significado_proyecto').value;
-        if (!significadoProyecto || !validateTextMinLength(significadoProyecto, 20) || !validateMeaningfulText(significadoProyecto)) {
-          document.getElementById('significado_proyecto').classList.add('error');
-          document.getElementById('significado-error').classList.add('active');
+        const conocimientoCastingChecked = document.querySelector('input[name="conocimiento_casting"]:checked');
+        if (!conocimientoCastingChecked) {
+          document.getElementById('conocimiento-casting-error').classList.add('active');
           isValid = false;
         }
         
-        const comentarioAdicional = document.getElementById('comentario_adicional').value;
-        if (!comentarioAdicional || !validateTextMinLength(comentarioAdicional, 20) || !validateMeaningfulText(comentarioAdicional)) {
-          document.getElementById('comentario_adicional').classList.add('error');
-          document.getElementById('comentario-error').classList.add('active');
+        // Validar si se seleccionó "Otro" en conocimiento_casting pero no se especificó cuál
+        if (conocimientoCastingChecked && conocimientoCastingChecked.value === 'Otro' && !document.getElementById('conocimiento_casting_otro').value) {
+          document.getElementById('conocimiento_casting_otro').classList.add('error');
+          document.getElementById('conocimiento-casting-error').classList.add('active');
+          isValid = false;
+        }
+        
+        if (!document.getElementById('terminos').checked) {
+          document.getElementById('terminos-error').classList.add('active');
           isValid = false;
         }
       }
       
       if (!isValid) {
-        showNotification('Atención', 'Por favor, completa todos los campos de forma detallada.', 'error');
+        showNotification('Atención', 'Por favor, completa todos los campos requeridos.', 'error');
       }
       
       return isValid;
@@ -2256,96 +2641,64 @@
           nombre_completo: document.getElementById('nombre_completo').value,
           edad: document.getElementById('edad').value,
           nacionalidad: document.getElementById('nacionalidad').value,
-          talentos: document.getElementById('talentos').value,
-          fortaleza: document.getElementById('fortaleza').value,
-          inspiracion: document.getElementById('inspiracion').value
+          ciudad: document.getElementById('ciudad').value,
+          email: document.getElementById('email').value,
+          telefono: document.getElementById('telefono').value
         };
       } else if (sectionNum === 2) {
+        const talentosChecked = document.querySelectorAll('input[name="talentos[]"]:checked');
+        const talentos = Array.from(talentosChecked).map(cb => cb.value);
+        
+        const experienciaPreviaChecked = document.querySelector('input[name="experiencia_previa"]:checked');
+        const formacionChecked = document.querySelector('input[name="formacion"]:checked');
+        
         formData.section2 = {
-          presion_valor: document.getElementById('presion_valor').value,
-          cualidad_unica: document.getElementById('cualidad_unica').value,
-          miedo_escenico: document.getElementById('miedo_escenico').value,
-          color_personalidad: document.getElementById('color_personalidad').value,
-          color_razon: document.getElementById('color_razon').value
+          talentos: talentos,
+          talento_otro: document.getElementById('talento_otro').value,
+          experiencia_previa: experienciaPreviaChecked ? experienciaPreviaChecked.value : '',
+          experiencia_detalle: document.getElementById('experiencia_detalle').value,
+          formacion: formacionChecked ? formacionChecked.value : ''
         };
       } else if (sectionNum === 3) {
-        const ratingChecked = document.querySelector('input[name="rating"]:checked');
+        const conocimientoProgramaChecked = document.querySelector('input[name="conocimiento_programa"]:checked');
         
         formData.section3 = {
-          escena_favorita: document.getElementById('escena_favorita').value,
-          rating: ratingChecked ? ratingChecked.value : '',
-          nuevo_personaje: document.getElementById('nuevo_personaje').value,
-          personaje_identificado: document.getElementById('personaje_identificado').value,
+          conocimiento_programa: conocimientoProgramaChecked ? conocimientoProgramaChecked.value : '',
+          personaje_favorito: document.getElementById('personaje_favorito').value,
           personaje_otro: document.getElementById('personaje_otro').value,
-          personaje_razon: document.getElementById('personaje_razon').value
+          motivacion: document.getElementById('motivacion').value,
+          aporte: document.getElementById('aporte').value
         };
       } else if (sectionNum === 4) {
-        const habilidadChecked = document.querySelector('input[name="habilidad_desarrollar"]:checked');
+        const redesChecked = document.querySelectorAll('input[name="redes[]"]:checked');
+        const redes = Array.from(redesChecked).map(cb => cb.value);
+        
+        const contenidoRedesChecked = document.querySelector('input[name="contenido_redes"]:checked');
         
         formData.section4 = {
-          desafio_superado: document.getElementById('desafio_superado').value,
-          improvisacion_valor: document.getElementById('improvisacion_valor').value,
-          habilidad_desarrollar: habilidadChecked ? habilidadChecked.value : '',
-          habilidad_otra: document.getElementById('habilidad_otra').value,
-          habilidad_razon: document.getElementById('habilidad_razon').value,
-          cancion_favorita: document.getElementById('cancion_favorita').value,
-          cancion_razon: document.getElementById('cancion_razon').value,
-          sentimiento_valor: document.getElementById('sentimiento_valor').value,
-          sentimiento_otro: document.getElementById('sentimiento_otro').value,
-          sentimiento_explicacion: document.getElementById('sentimiento_explicacion').value
+          redes: redes,
+          red_otra: document.getElementById('red_otra').value,
+          instagram: document.getElementById('instagram').value,
+          tiktok: document.getElementById('tiktok').value,
+          contenido_redes: contenidoRedesChecked ? contenidoRedesChecked.value : '',
+          enlace_video: document.getElementById('enlace_video').value
         };
       } else if (sectionNum === 5) {
-        const aparienciaChecked = document.querySelector('input[name="cambio_apariencia"]:checked');
-        const disponibilidadChecked = document.querySelectorAll('input[name="disponibilidad[]"]:checked');
+        const cambioAparienciaChecked = document.querySelector('input[name="cambio_apariencia"]:checked');
         const mudanzaChecked = document.querySelector('input[name="mudanza"]:checked');
-        
-        const disponibilidad = Array.from(disponibilidadChecked).map(cb => cb.value);
+        const conocimientoCastingChecked = document.querySelector('input[name="conocimiento_casting"]:checked');
         
         formData.section5 = {
-          cambio_apariencia: aparienciaChecked ? aparienciaChecked.value : '',
-          apariencia_razon: document.getElementById('apariencia_razon').value,
-          disponibilidad: disponibilidad,
-          disponibilidad_detalles: document.getElementById('disponibilidad_detalles').value,
+          cambio_apariencia: cambioAparienciaChecked ? cambioAparienciaChecked.value : '',
           mudanza: mudanzaChecked ? mudanzaChecked.value : '',
-          mudanza_razon: document.getElementById('mudanza_razon').value,
-          significado_proyecto: document.getElementById('significado_proyecto').value,
-          comentario_adicional: document.getElementById('comentario_adicional').value
+          conocimiento_casting: conocimientoCastingChecked ? conocimientoCastingChecked.value : '',
+          conocimiento_casting_otro: document.getElementById('conocimiento_casting_otro').value,
+          comentario_adicional: document.getElementById('comentario_adicional').value,
+          terminos: document.getElementById('terminos').checked
         };
       }
       
       console.log('Datos del formulario actualizados:', formData);
-    }
-    
-    // Selección de emojis
-    function selectEmoji(element) {
-      // Eliminar selección previa
-      const emojis = document.querySelectorAll('.emoji');
-      emojis.forEach(emoji => emoji.classList.remove('selected'));
-      
-      // Seleccionar actual
-      element.classList.add('selected');
-      
-      // Guardar valor
-      document.getElementById('presion_valor').value = element.getAttribute('data-value');
-      
-      // Ocultar mensaje de error si existe
-      document.getElementById('presion-error').classList.remove('active');
-    }
-    
-    // Selección de color
-    function selectColor(element) {
-      // Eliminar selección previa
-      const colors = document.querySelectorAll('.color-option');
-      colors.forEach(color => color.classList.remove('selected'));
-      
-      // Seleccionar actual
-      element.classList.add('selected');
-      
-      // Guardar valor
-      document.getElementById('color_personalidad').value = element.getAttribute('data-color');
-      
-      // Ocultar mensaje de error si existe
-      document.getElementById('color-error').classList.remove('active');
     }
     
     // Selección de personaje
@@ -2358,7 +2711,7 @@
       element.classList.add('selected');
       
       // Guardar valor
-      document.getElementById('personaje_identificado').value = value;
+      document.getElementById('personaje_favorito').value = value;
       
       // Mostrar/ocultar campo adicional
       const container = document.getElementById('personaje_otro_container');
@@ -2369,42 +2722,7 @@
       }
       
       // Ocultar mensaje de error si existe
-      document.getElementById('personaje-identificado-error').classList.remove('active');
-    }
-    
-    // Selección de sentimiento
-    function selectFeeling(element, value) {
-      // Eliminar selección previa
-      const feelings = document.querySelectorAll('.feeling-option');
-      feelings.forEach(feeling => feeling.classList.remove('selected'));
-      
-      // Seleccionar actual
-      element.classList.add('selected');
-      
-      // Guardar valor
-      document.getElementById('sentimiento_valor').value = value;
-      
-      // Mostrar/ocultar campo adicional
-      const container = document.getElementById('sentimiento_otro_container');
-      if (value === 'Otro') {
-        container.classList.add('active');
-      } else {
-        container.classList.remove('active');
-      }
-      
-      // Ocultar mensaje de error si existe
-      document.getElementById('sentimiento-error').classList.remove('active');
-    }
-    
-    // Actualizar valor de range slider
-    function updateRangeValue(element) {
-      const value = element.value;
-      const rangeValueElement = element.parentNode.querySelector('.range-value');
-      rangeValueElement.textContent = value;
-      
-      // Posicionar el valor
-      const percent = ((value - element.min) / (element.max - element.min)) * 100;
-      rangeValueElement.style.left = `calc(${percent}% + (${8 - percent * 0.15}px))`;
+      document.getElementById('personaje-error').classList.remove('active');
     }
     
     // Validar input de texto
@@ -2536,6 +2854,29 @@
       animate();
     }
     
+    // Crear emojis de celebración
+    function createCelebrationEmojis() {
+      const phaseCompleteCard = document.getElementById('phaseCompleteCard');
+      const emojis = ['🎉', '🎊', '🥳', '✨', '⭐', '🌟', '💫', '🎵', '🎬', '🎭', '🎤'];
+      const numberOfEmojis = 20;
+      
+      for (let i = 0; i < numberOfEmojis; i++) {
+        const emoji = document.createElement('div');
+        emoji.classList.add('celebration-emoji');
+        emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        // Posición aleatoria
+        const posX = Math.random() * 100;
+        emoji.style.left = `${posX}%`;
+        
+        // Delay aleatorio
+        const delay = Math.random() * 4;
+        emoji.style.animationDelay = `${delay}s`;
+        
+        phaseCompleteCard.appendChild(emoji);
+      }
+    }
+    
     // Envío del formulario
     function submitForm() {
       // Validar el formulario
@@ -2557,7 +2898,6 @@
         
         // Actualizar progreso
         document.getElementById('progressBar').style.width = '100%';
-        document.getElementById('currentStep').textContent = '5';
         updateStepIndicators(5);
         
         // Mostrar sección de éxito
@@ -2566,27 +2906,38 @@
         
         setTimeout(() => {
           document.getElementById('successSection').classList.add('active');
-          document.getElementById('successCard').classList.add('active');
+          document.getElementById('phaseCompleteCard').classList.add('active');
           
-          // Lanzar confeti
+          // Lanzar confeti para celebrar la finalización de la primera fase
           launchConfetti();
+          
+          // Crear emojis de celebración
+          createCelebrationEmojis();
         }, 200);
       }, 3000);
     }
     
-    // Finalizar casting
-    function finishCasting() {
-      // Mostrar mensaje de despedida
-      showNotification('¡Éxito!', 'Gracias por participar en nuestro casting. ¡Buena suerte!');
+    // Ir a la segunda fase
+    function goToPhaseTwo() {
+      // Mostrar mensaje de transición
+      showNotification('¡Excelente!', 'Continuando a la segunda fase del casting', 'success');
       
-      // Redirigir a página principal después de un breve retraso
+      // Mostrar overlay de carga con mensaje específico
+      showLoading();
+      document.getElementById('loadingOverlay').querySelector('.loading-text').textContent = 'Preparando segunda fase...';
+      
+      // Simular carga (2 segundos)
       setTimeout(() => {
-        // Aquí se redireccionaría a la página principal
-        // window.location.href = 'https://www.venevision.com';
+        // Ocultar overlay de carga
+        hideLoading();
         
-        // Para el ejemplo, simplemente recargaremos la página
-        window.location.reload();
-      }, 3000);
+        // Activar el frame de Tally.so
+        const phaseTwoFrame = document.getElementById('phaseTwoFrame');
+        phaseTwoFrame.style.display = 'block';
+        
+        // Activar el widget de Tally
+        Tally.loadEmbeds();
+      }, 2000);
     }
   </script>
 </body>

@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Casting Somos Tu Y Yo - Segunda Fase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Formulario de casting para la nueva temporada de Somos Tu Y Yo" />
+
+  <link rel="icon" href="https://i.ibb.co/9GJdXs2/favicon.png" type="image/png" />
+
+  <!-- Fuentes e Iconos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #1a1f71; 
+      --primary-dark: #0d153e; 
+      --secondary: #3b82f6;
+      --accent: #60a5fa;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --purple: #8b5cf6;
+      --pink: #ec4899;
+      --teal: #14b8a6;
+
+      --border-white: #ffffff;
+      --border-gray: #d1d5db; 
+      --border-light-blue: #93c5fd; 
+
+      --background: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.98);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+
+      --border-radius-xl: 28px;
+      --border-radius-lg: 24px;
+      --border-radius: 16px;
+      --border-radius-sm: 12px;
+
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.2);
+
+      --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+      --gradient-success: linear-gradient(135deg, var(--success), #0ea5e9);
+      --gradient-purple-pink: linear-gradient(135deg, var(--purple), var(--pink));
+      --gradient-blue-teal: linear-gradient(135deg, var(--secondary), var(--teal));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1rem;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 650px;
+      width: 100%;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+      background: var(--card-bg);
+      border-radius: var(--border-radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--border-white);
+      overflow: hidden;
+      position: relative;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      animation: glow 6s ease infinite, border-blink 6s linear infinite;
+    }
+    
+    .container.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 40px rgba(26, 31, 113, 0.4), 0 0 80px rgba(26, 31, 113, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 70px rgba(26, 31, 113, 0.6), 0 0 100px rgba(26, 31, 113, 0.4);
+      }
+    }
+    
+    @keyframes border-blink {
+      0%   { border-color: var(--border-white); }
+      33%  { border-color: var(--border-gray); }
+      66%  { border-color: var(--border-light-blue); }
+      100% { border-color: var(--border-white); }
+    }
+
+    .header {
+      text-align: center;
+      background: var(--gradient-primary);
+      color: #fff;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+      border-top-left-radius: var(--border-radius-xl);
+      border-top-right-radius: var(--border-radius-xl);
+    }
+    
+    .header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/mGr07f3/pattern.png');
+      background-size: cover;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    .header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-20deg);
+      animation: header-flash 8s infinite;
+    }
+    
+    @keyframes header-flash {
+      0% {
+        left: -100%;
+        opacity: 0;
+      }
+      20% {
+        left: 100%;
+        opacity: 0.4;
+      }
+      100% {
+        left: 100%;
+        opacity: 0;
+      }
+    }
+
+    .header-logo {
+      width: 220px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Barra de progreso */
+    .progress-container {
+      padding: 0 2rem;
+      margin-top: -1.5rem;
+      position: relative;
+      z-index: 5;
+    }
+    
+    .progress-bar {
+      height: 16px;
+      background-color: #e2e8f0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--gradient-success);
+      width: 40%; /* Progreso inicial */
+      transition: width 0.6s ease-in-out;
+      border-radius: var(--border-radius);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: skewX(-45deg);
+      animation: move 2s linear infinite;
+    }
+    
+    @keyframes move {
+      0% { left: -50%; }
+      100% { left: 100%; }
+    }
+    
+    .progress-text {
+      text-align: right;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+      font-weight: 500;
+    }
+
+    /* Formulario */
+    .form-container {
+      padding: 2.5rem 2rem 2rem;
+    }
+
+    .form-section {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-out;
+    }
+    
+    .form-section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .section-title i {
+      font-size: 1.2rem;
+      color: var(--secondary);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.875rem 1.25rem;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--border-radius-sm);
+      font-size: 1rem;
+      background: #fff;
+      transition: var(--transition);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(26, 31, 113, 0.1);
+    }
+    
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    
+    .radio-item, .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.8rem;
+      background: #f1f5f9;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid #e2e8f0;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    
+    .radio-item:hover, .checkbox-item:hover {
+      background: #e2e8f0;
+    }
+
+    .radio-item input, .checkbox-item input {
+      margin: 0;
+    }
+
+    .emoji-scale {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+    
+    .emoji-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    .emoji {
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+      filter: grayscale(1);
+      opacity: 0.6;
+    }
+    
+    .emoji:hover, .emoji.selected {
+      transform: scale(1.2);
+      filter: grayscale(0);
+      opacity: 1;
+    }
+    
+    .form-helper {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.3rem;
+    }
+
+    /* Botones */
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .btn-container.center {
+      justify-content: center;
+    }
+    
+    .btn-glow-container {
+      position: relative;
+      width: 140px;
+      height: 50px;
+    }
+    
+    .btn-glow-effect {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+      background-size: 200% 100%;
+      border-radius: 30px;
+      animation: border-glow 3s ease infinite;
+      filter: blur(15px);
+      opacity: 0.7;
+      z-index: 0;
+    }
+    
+    @keyframes border-glow {
+      0%   { background-position: -100% 0; }
+      50%  { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+    
+    .btn-glow {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.3), inset 0 -4px 8px rgba(255,255,255,0.3);
+      transition: all 0.3s ease, transform 0.2s ease-in-out;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-glow:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .btn-glow-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-glow-initial {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .btn-glow:hover .btn-glow-initial {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    
+    .btn-glow-hover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateX(-100%);
+      color: white;
+    }
+    
+    .btn-glow:hover .btn-glow-hover {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .btn-glow-icon {
+      margin-left: 10px;
+    }
+    
+    .btn-glow.secondary {
+      background: var(--gradient-blue-teal);
+    }
+    
+    .btn-glow.success {
+      background: var(--gradient-success);
+    }
+
+    /* Tarjeta para el paso final */
+    .success-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      border-radius: var(--border-radius-lg);
+      padding: 2rem;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      border: 2px solid rgba(255,255,255,0.6);
+      box-shadow: var(--shadow);
+      margin: 2rem 0 1rem;
+      transform: scale(0.95);
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+    
+    .success-card.active {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    .success-icon {
+      width: 100px;
+      height: 100px;
+      background: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+    
+    .success-icon i {
+      font-size: 3.5rem;
+      color: white;
+    }
+    
+    .success-icon::after {
+      content: '';
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      border-radius: 50%;
+      border: 2px solid var(--success);
+      opacity: 0.5;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1.1); opacity: 0.3; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+    }
+    
+    .success-card h2 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    .success-card p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+    
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0 1rem;
+    }
+    
+    .step {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      margin: 0 0.3rem;
+      position: relative;
+    }
+    
+    .step.active {
+      background: var(--primary);
+    }
+    
+    .step.completed {
+      background: var(--success);
+    }
+    
+    .step::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 2px;
+      background: #e2e8f0;
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+    }
+    
+    .step:last-child::after {
+      display: none;
+    }
+    
+    .step.completed::after {
+      background: var(--success);
+    }
+
+    /* Secciones ocultas inicialmente */
+    .section-2, .section-3, .section-4, .section-5, .success-section {
+      display: none;
+    }
+
+    /* Personalización para rangeSlider */
+    .range-slider {
+      width: 100%;
+      margin: 1rem 0;
+    }
+    
+    .range-container {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+    
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: #e2e8f0;
+      outline: none;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .range-value {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* Animación de pulsación para efectos visuales */
+    .pulse-animation {
+      animation: pulse-effect 2s infinite;
+    }
+    
+    @keyframes pulse-effect {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Datos personales resumidos */
+    .user-data-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: var(--border-radius-sm);
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gradient-purple-pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .user-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+      color: var(--primary);
+    }
+    
+    .user-info p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    /* Loading overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    
+    .loading-overlay.active {
+      display: flex;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(59, 130, 246, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--secondary);
+      animation: spin 1s linear infinite;
+    }
+    
+    .loading-text {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Validación de formulario */
+    .form-control.error {
+      border-color: var(--danger);
+    }
+    
+    .error-message {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+      display: none;
+    }
+    
+    .error-message.active {
+      display: block;
+    }
+
+    /* Efecto de focus en radio y checkbox */
+    .radio-item input:focus + span,
+    .checkbox-item input:focus + span {
+      text-decoration: underline;
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+      margin-left: 0.3rem;
+    }
+    
+    .tooltip i {
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+    
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--primary);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 0.5rem;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.8rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--primary) transparent transparent transparent;
+    }
+    
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Social media links */
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f5f9;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+    
+    .social-link:hover {
+      transform: translateY(-3px);
+      color: white;
+    }
+    
+    .social-link.instagram:hover {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+    
+    .social-link.venevision:hover {
+      background: #007BFF;
+    }
+    
+    .social-link.youtube:hover {
+      background: #FF0000;
+    }
+    
+    .social-link.twitter:hover {
+      background: #1DA1F2;
+    }
+
+    /* Notificaciones temporales */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 1rem;
+      border-radius: var(--border-radius-sm);
+      box-shadow: var(--shadow);
+      transform: translateX(120%);
+      transition: transform 0.3s;
+      z-index: 101;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    
+    .notification.active {
+      transform: translateX(0);
+    }
+    
+    .notification-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .notification-icon.error {
+      background: var(--danger);
+    }
+    
+    .notification-content h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.1rem;
+    }
+    
+    .notification-content p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    /* Estilos para las estrellas de calificación */
+    .star-rating {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 0.3rem;
+    }
+    
+    .star-rating input {
+      display: none;
+    }
+    
+    .star-rating label {
+      cursor: pointer;
+      color: #d1d5db;
+      font-size: 1.8rem;
+      transition: var(--transition);
+    }
+    
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label {
+      color: #fbbf24;
+    }
+    
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      transform: scale(1.1);
+    }
+
+    /* Estilos para preguntas condicionales (que se muestran/ocultan) */
+    .conditional-question {
+      margin-top: 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+      opacity: 0;
+    }
+    
+    .conditional-question.active {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 1rem;
+    }
+
+    /* Divertido selector de personaje */
+    .character-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .character-option {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--border-radius-sm);
+      padding: 0.5rem;
+      width: calc(50% - 0.5rem);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .character-option:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-sm);
+      border-color: var(--secondary);
+    }
+    
+    .character-option.selected {
+      border-color: var(--primary);
+      background: rgba(26, 31, 113, 0.05);
+    }
+    
+    .character-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+      border: 2px solid white;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .character-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+    
+    .character-role {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Emojis para expresar sentimientos */
+    .feeling-selector {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    
+    .feeling-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .feeling-option:hover {
+      transform: scale(1.1);
+    }
+    
+    .feeling-emoji {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+    
+    .feeling-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Color picker */
+    .color-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .color-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .color-option:hover, .color-option.selected {
+      transform: scale(1.2);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .color-option.selected {
+      border: 2px solid black;
+    }
+
+    /* Confeti para la animación final */
+    canvas#confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    /* Juego de memoria para la sección adicional */
+    .memory-game {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 1rem 0;
+    }
+    
+    .memory-card {
+      height: 80px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+      cursor: pointer;
+    }
+    
+    .memory-card.flipped {
+      transform: rotateY(180deg);
+    }
+    
+    .memory-card-front, .memory-card-back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      border-radius: var(--border-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .memory-card-front {
+      background: var(--gradient-primary);
+      transform: rotateY(180deg);
+      font-size: 1.5rem;
+      color: white;
+    }
+    
+    .memory-card-back {
+      background: var(--gradient-blue-teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        padding: 2rem 1.5rem;
+      }
+      
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .header p {
+        font-size: 0.95rem;
+      }
+      
+      .form-container {
+        padding: 2rem 1.5rem 1.5rem;
+      }
+      
+      .btn-glow-container {
+        width: 120px;
+      }
+      
+      .success-icon {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .success-icon i {
+        font-size: 2.8rem;
+      }
+      
+      .success-card h2 {
+        font-size: 1.5rem;
+      }
+      
+      .character-option {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header {
+        padding: 1.8rem 1.2rem;
+      }
+      
+      .header-logo {
+        width: 180px;
+      }
+      
+      .header h1 {
+        font-size: 1.5rem;
+      }
+      
+      .form-container {
+        padding: 1.8rem 1.2rem 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 1.2rem;
+      }
+      
+      .radio-group, .checkbox-group {
+        gap: 0.5rem;
+      }
+      
+      .btn-container {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .btn-glow-container {
+        width: 100%;
+        max-width: 200px;
+      }
+      
+      .user-data-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .user-info h3 {
+        font-size: 1rem;
+      }
+      
+      .emoji-scale {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      
+      .social-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .memory-game {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div style="text-align: center;">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Cargando...</div>
+    </div>
+  </div>
+
+  <!-- Notificación temporal -->
+  <div class="notification" id="notification">
+    <div class="notification-icon" id="notificationIcon">
+      <i class="fas fa-check"></i>
+    </div>
+    <div class="notification-content">
+      <h4 id="notificationTitle">Éxito</h4>
+      <p id="notificationText">Operación completada correctamente.</p>
+    </div>
+  </div>
+
+  <!-- Canvas para el confeti final -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container" id="mainContainer">
+    <!-- Header -->
+    <div class="header">
+      <img src="https://www-somostuyyovv-com.s3.us-west-2.amazonaws.com/public/media/logos/01JJW5SBXM6H8MX0DQ6G656S60.png" alt="Somos Tu Y Yo" class="header-logo">
+      <h1>Casting Segunda Fase</h1>
+      <p>¡Felicidades por avanzar! Ayúdanos a conocerte mejor completando estas preguntas adicionales.</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progressBar" style="width: 20%;"></div>
+      </div>
+      <div class="progress-text">Fase 2: Paso <span id="currentStep">1</span> de 5</div>
+    </div>
+
+    <!-- Form Container -->
+    <div class="form-container">
+      <!-- Step Indicator -->
+      <div class="step-indicator">
+        <div class="step active" data-step="1"></div>
+        <div class="step" data-step="2"></div>
+        <div class="step" data-step="3"></div>
+        <div class="step" data-step="4"></div>
+        <div class="step" data-step="5"></div>
+      </div>
+
+      <!-- Datos personales resumidos (se muestra en todos los pasos) -->
+      <div class="user-data-card">
+        <div class="user-avatar" id="userAvatar">
+          ??
+        </div>
+        <div class="user-info">
+          <h3 id="userName">Participante</h3>
+          <p><span id="userAge">--</span> años • <span id="userNationality">--</span> • <span id="userTalentSummary">--</span></p>
+        </div>
+      </div>
+
+      <!-- Section 1: Personalidad y Creatividad -->
+      <div class="form-section active" id="section1">
+        <h2 class="section-title"><i class="fas fa-star"></i> Personalidad y Creatividad</h2>
+        
+        <div class="form-group">
+          <label class="form-label">¿Cuál es tu nombre completo?</label>
+          <input type="text" class="form-control" id="nombre_completo" placeholder="Escribe tu nombre y apellido">
+          <div class="error-message" id="nombre-error">Por favor, ingresa tu nombre completo.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Cuántos años tienes?</label>
+          <input type="number" class="form-control" id="edad" placeholder="Ingresa tu edad" min="13" max="30">
+          <div class="error-message" id="edad-error">Por favor, ingresa una edad válida entre 13 y 30 años.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Cuál es tu nacionalidad?</label>
+          <input type="text" class="form-control" id="nacionalidad" placeholder="Ej.: Venezolano/a, Colombiano/a, etc.">
+          <div class="error-message" id="nacionalidad-error">Por favor, indica tu nacionalidad.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Resume tus talentos principales (separados por coma)</label>
+          <input type="text" class="form-control" id="talentos" placeholder="Ej.: Canto, baile, actuación...">
+          <div class="error-message" id="talentos-error">Por favor, indica al menos un talento.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Cuál es tu mayor fortaleza como artista?</label>
+          <textarea class="form-control" id="fortaleza" placeholder="Describe tu mayor talento o habilidad con detalle"></textarea>
+          <div class="error-message" id="fortaleza-error">Por favor, describe tu fortaleza con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Qué te inspira a crear o actuar?</label>
+          <textarea class="form-control" id="inspiracion" placeholder="Cuéntanos qué te motiva o inspira a desarrollar tu arte..."></textarea>
+          <div class="error-message" id="inspiracion-error">Por favor, elabora más tu respuesta (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="btn-container">
+          <div></div> <!-- Spacer para alinear -->
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow" onclick="nextSection(1)">
+              <div class="btn-glow-content btn-glow-initial">
+                Continuar
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Continuar
+                <i class="fas fa-arrow-right btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Habilidades y Creatividad -->
+      <div class="form-section section-2" id="section2">
+        <h2 class="section-title"><i class="fas fa-lightbulb"></i> Habilidades y Creatividad</h2>
+        
+        <div class="form-group">
+          <label class="form-label">¿Cómo manejas la presión en situaciones de estrés?</label>
+          <div class="emoji-scale">
+            <div class="emoji-item">
+              <span class="emoji" data-value="1" onclick="selectEmoji(this)">😰</span>
+              <span>Me bloqueo</span>
+            </div>
+            <div class="emoji-item">
+              <span class="emoji" data-value="2" onclick="selectEmoji(this)">😟</span>
+              <span>Me cuesta</span>
+            </div>
+            <div class="emoji-item">
+              <span class="emoji" data-value="3" onclick="selectEmoji(this)">😐</span>
+              <span>Normal</span>
+            </div>
+            <div class="emoji-item">
+              <span class="emoji" data-value="4" onclick="selectEmoji(this)">😊</span>
+              <span>Bien</span>
+            </div>
+            <div class="emoji-item">
+              <span class="emoji" data-value="5" onclick="selectEmoji(this)">😎</span>
+              <span>Excelente</span>
+            </div>
+          </div>
+          <input type="hidden" id="presion_valor">
+          <div class="error-message" id="presion-error">Por favor, selecciona una opción.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Qué cualidad única aportarías al show?</label>
+          <textarea class="form-control" id="cualidad_unica" placeholder="¿Qué te hace especial y diferente? Sé específico/a."></textarea>
+          <div class="error-message" id="cualidad-error">Por favor, describe tu cualidad única con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Has enfrentado el miedo escénico? ¿Cómo lo superaste?</label>
+          <textarea class="form-control" id="miedo_escenico" placeholder="Comparte tu experiencia y las técnicas que utilizaste para superar el miedo..."></textarea>
+          <div class="error-message" id="miedo-error">Por favor, elabora más tu respuesta (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Si pudieras elegir un color que represente tu personalidad, ¿cuál sería y por qué?</label>
+          <div class="color-picker">
+            <div class="color-option" style="background-color: #e53935;" data-color="Rojo" onclick="selectColor(this)"></div>
+            <div class="color-option" style="background-color: #FB8C00;" data-color="Naranja" onclick="selectColor(this)"></div>
+            <div class="color-option" style="background-color: #FDD835;" data-color="Amarillo" onclick="selectColor(this)"></div>
+            <div class="color-option" style="background-color: #43A047;" data-color="Verde" onclick="selectColor(this)"></div>
+            <div class="color-option" style="background-color: #1E88E5;" data-color="Azul" onclick="selectColor(this)"></div>
+            <div class="color-option" style="background-color: #5E35B1;" data-color="Violeta" onclick="selectColor(this)"></div>
+            <div class="color-option" style="background-color: #D81B60;" data-color="Rosa" onclick="selectColor(this)"></div>
+            <div class="color-option" style="background-color: #4E342E;" data-color="Marrón" onclick="selectColor(this)"></div>
+          </div>
+          <input type="hidden" id="color_personalidad">
+          <textarea class="form-control" id="color_razon" placeholder="Explica por qué elegiste este color..." style="margin-top:0.75rem;"></textarea>
+          <div class="error-message" id="color-error">Por favor, selecciona un color y explica tu elección (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="btn-container">
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow secondary" onclick="prevSection(2)">
+              <div class="btn-glow-content btn-glow-initial">
+                Atrás
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Atrás
+                <i class="fas fa-arrow-left btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+          
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow" onclick="nextSection(2)">
+              <div class="btn-glow-content btn-glow-initial">
+                Continuar
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Continuar
+                <i class="fas fa-arrow-right btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Conexión con la Serie -->
+      <div class="form-section section-3" id="section3">
+        <h2 class="section-title"><i class="fas fa-tv"></i> Conexión con la Serie</h2>
+        
+        <div class="form-group">
+          <label class="form-label">¿Cuál fue tu escena favorita de Somos Tu Y Yo?</label>
+          <textarea class="form-control" id="escena_favorita" placeholder="Describe tu escena favorita con detalle y explica por qué te impactó..."></textarea>
+          <div class="error-message" id="escena-error">Por favor, describe tu escena favorita con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Cuántas estrellas le darías a la serie?
+            <div class="tooltip"><i class="fas fa-info-circle"></i>
+              <span class="tooltip-text">Califica de 1 a 5 estrellas donde 5 es la mejor calificación.</span>
+            </div>
+          </label>
+          <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5"><i class="fas fa-star"></i></label>
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label for="star4"><i class="fas fa-star"></i></label>
+            <input type="radio" id="star3" name="rating" value="3" />
+            <label for="star3"><i class="fas fa-star"></i></label>
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label for="star2"><i class="fas fa-star"></i></label>
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label for="star1"><i class="fas fa-star"></i></label>
+          </div>
+          <div class="error-message" id="rating-error">Por favor, califica la serie.</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Si pudieras crear un personaje nuevo para la serie, ¿cómo sería?</label>
+          <textarea class="form-control" id="nuevo_personaje" placeholder="Describe el personaje que te gustaría interpretar, su personalidad, historia, sueños..."></textarea>
+          <div class="error-message" id="personaje-error">Por favor, describe tu personaje con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Con qué personaje de la serie te identificas más?</label>
+          <div class="character-selector">
+            <div class="character-option" onclick="selectCharacter(this, 'Sheryl Rubio')" data-character="Sheryl Rubio">
+              <div class="character-img" style="background-color: #FFC0CB; display: flex; justify-content: center; align-items: center;">SR</div>
+              <div class="character-name">Sheryl Rubio</div>
+              <div class="character-role">Sheryl Sánchez</div>
+            </div>
+            <div class="character-option" onclick="selectCharacter(this, 'Victor Drija')" data-character="Victor Drija">
+              <div class="character-img" style="background-color: #ADD8E6; display: flex; justify-content: center; align-items: center;">VD</div>
+              <div class="character-name">Victor Drija</div>
+              <div class="character-role">Víctor González</div>
+            </div>
+            <div class="character-option" onclick="selectCharacter(this, 'Arán de las Casas')" data-character="Arán de las Casas">
+              <div class="character-img" style="background-color: #D3D3D3; display: flex; justify-content: center; align-items: center;">AC</div>
+              <div class="character-name">Arán de las Casas</div>
+              <div class="character-role">Rocker</div>
+            </div>
+            <div class="character-option" onclick="selectCharacter(this, 'Hendrick Bages')" data-character="Hendrick Bages">
+              <div class="character-img" style="background-color: #F0E68C; display: flex; justify-content: center; align-items: center;">HB</div>
+              <div class="character-name">Hendrick Bages</div>
+              <div class="character-role">René Almos</div>
+            </div>
+            <div class="character-option" onclick="selectCharacter(this, 'Kelly Delgado')" data-character="Kelly Delgado">
+              <div class="character-img" style="background-color: #98FB98; display: flex; justify-content: center; align-items: center;">KD</div>
+              <div class="character-name">Kelly Delgado</div>
+              <div class="character-role">Ludmila</div>
+            </div>
+            <div class="character-option" onclick="selectCharacter(this, 'Rosmel Bustamante')" data-character="Rosmel Bustamante">
+              <div class="character-img" style="background-color: #FFD700; display: flex; justify-content: center; align-items: center;">RB</div>
+              <div class="character-name">Rosmel Bustamante</div>
+              <div class="character-role">Oracio Barrios</div>
+            </div>
+            <div class="character-option" onclick="selectCharacter(this, 'Otro')" data-character="Otro">
+              <div class="character-img" style="background-color: #A9A9A9; display: flex; justify-content: center; align-items: center;"><i class="fas fa-plus"></i></div>
+              <div class="character-name">Otro</div>
+              <div class="character-role">Especificar</div>
+            </div>
+          </div>
+          <input type="hidden" id="personaje_identificado">
+          <div class="conditional-question" id="personaje_otro_container">
+            <input type="text" class="form-control" id="personaje_otro" placeholder="Especifica el personaje">
+          </div>
+          <textarea class="form-control" id="personaje_razon" placeholder="Explica por qué te identificas con este personaje..." style="margin-top:0.75rem;"></textarea>
+          <div class="error-message" id="personaje-identificado-error">Por favor, selecciona un personaje y explica con más detalle por qué te identificas (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="btn-container">
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow secondary" onclick="prevSection(3)">
+              <div class="btn-glow-content btn-glow-initial">
+                Atrás
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Atrás
+                <i class="fas fa-arrow-left btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+          
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow" onclick="nextSection(3)">
+              <div class="btn-glow-content btn-glow-initial">
+                Continuar
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Continuar
+                <i class="fas fa-arrow-right btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Desafíos y Habilidades -->
+      <div class="form-section section-4" id="section4">
+        <h2 class="section-title"><i class="fas fa-trophy"></i> Desafíos y Habilidades</h2>
+        
+        <div class="form-group">
+          <label class="form-label">Cuéntanos sobre un desafío artístico que hayas superado y qué aprendiste de él</label>
+          <textarea class="form-control" id="desafio_superado" placeholder="Describe una situación difícil relacionada con tu carrera artística que superaste..."></textarea>
+          <div class="error-message" id="desafio-error">Por favor, comparte un desafío con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Qué tanto te consideras bueno para improvisar?</label>
+          <div class="range-container">
+            <input type="range" min="1" max="10" value="5" class="range-slider" id="improvisacion_valor" oninput="updateRangeValue(this)">
+            <div class="range-labels">
+              <span>Principiante</span>
+              <span>Intermedio</span>
+              <span>Experto</span>
+            </div>
+            <div class="range-value">5</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Qué habilidad artística te gustaría desarrollar más?</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="habilidad_desarrollar" value="Actuación"> Actuación
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="habilidad_desarrollar" value="Canto"> Canto
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="habilidad_desarrollar" value="Baile"> Baile
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="habilidad_desarrollar" value="Instrumento musical"> Instrumento musical
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="habilidad_desarrollar" value="Otro"> Otro
+            </label>
+          </div>
+          <div class="conditional-question" id="habilidad_otra_container">
+            <input type="text" class="form-control" id="habilidad_otra" placeholder="Especifica qué habilidad te gustaría desarrollar">
+          </div>
+          <textarea class="form-control" id="habilidad_razon" placeholder="Explica por qué quieres desarrollar esta habilidad y cómo te ayudaría..." style="margin-top:0.75rem;"></textarea>
+          <div class="error-message" id="habilidad-error">Por favor, selecciona una habilidad y explica con más detalle por qué quieres desarrollarla (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Cuál es tu canción favorita para interpretar?</label>
+          <input type="text" class="form-control" id="cancion_favorita" placeholder="Nombre de la canción y artista">
+          <textarea class="form-control" id="cancion_razon" placeholder="¿Por qué elegiste esta canción? ¿Qué significa para ti?" style="margin-top:0.75rem;"></textarea>
+          <div class="form-helper">Si te seleccionamos, podrías interpretarla en la próxima fase</div>
+          <div class="error-message" id="cancion-error">Por favor, indica tu canción favorita y explica tu elección con más detalle (mínimo 20 palabras).</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">¿Qué sentimiento te transmite la música cuando actúas o bailas?</label>
+          <div class="feeling-selector">
+            <div class="feeling-option" onclick="selectFeeling(this, 'Libertad')">
+              <div class="feeling-emoji">🦅</div>
+              <div class="feeling-label">Libertad</div>
+            </div>
+            <div class="feeling-option" onclick="selectFeeling(this, 'Alegría')">
+              <div class="feeling-emoji">😄</div>
+              <div class="feeling-label">Alegría</div>
+            </div>
+            <div class="feeling-option" onclick="selectFeeling(this, 'Poder')">
+              <div class="feeling-emoji">💪</div>
+              <div class="feeling-label">Poder</div>
+            </div>
+            <div class="feeling-option" onclick="selectFeeling(this, 'Paz')">
+              <div class="feeling-emoji">☮️</div>
+              <div class="feeling-label">Paz</div>
+            </div>
+            <div class="feeling-option" onclick="selectFeeling(this, 'Pasión')">
+              <div class="feeling-emoji">❤️</div>
+              <div class="feeling-label">Pasión</div>
+            </div>
+            <div class="feeling-option" onclick="selectFeeling(this, 'Otro')">
+              <div class="feeling-emoji">✨</div>
+              <div class="feeling-label">Otro</div>
+            </div>
+          </div>
+          <input type="hidden" id="sentimiento_valor">
+          <div class="conditional-question" id="sentimiento_otro_container">
+            <input type="text" class="form-control" id="sentimiento_otro" placeholder="Especifica el sentimiento">
+          </div>
+          <textarea class="form-control" id="sentimiento_explicacion" placeholder="Explica cómo este sentimiento influye en tu interpretación..." style="margin-top:0.75rem;"></textarea>
+          <div class="error-message" id="sentimiento-error">Por favor, selecciona un sentimiento y explícalo con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="btn-container">
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow secondary" onclick="prevSection(4)">
+              <div class="btn-glow-content btn-glow-initial">
+                Atrás
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Atrás
+                <i class="fas fa-arrow-left btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+          
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow" onclick="nextSection(4)">
+              <div class="btn-glow-content btn-glow-initial">
+                Continuar
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Continuar
+                <i class="fas fa-arrow-right btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Compromiso y Disponibilidad -->
+      <div class="form-section section-5" id="section5">
+        <h2 class="section-title"><i class="fas fa-calendar-check"></i> Compromiso y Disponibilidad</h2>
+        
+        <div class="form-group">
+          <label class="form-label">¿Estarías dispuesto/a a cambiar tu apariencia (corte de pelo, color, etc.) para un papel?</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="cambio_apariencia" value="Sí, completamente"> Sí, completamente
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="cambio_apariencia" value="Depende del cambio"> Depende del cambio
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="cambio_apariencia" value="Preferiría no hacerlo"> Preferiría no hacerlo
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="cambio_apariencia" value="No"> No
+            </label>
+          </div>
+          <textarea class="form-control" id="apariencia_razon" placeholder="Explica tu respuesta..." style="margin-top:0.75rem;"></textarea>
+          <div class="error-message" id="apariencia-error">Por favor, selecciona una opción y explica tu respuesta con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Qué días de la semana tienes mayor disponibilidad?</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="disponibilidad[]" value="Lunes"> Lunes
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="disponibilidad[]" value="Martes"> Martes
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="disponibilidad[]" value="Miércoles"> Miércoles
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="disponibilidad[]" value="Jueves"> Jueves
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="disponibilidad[]" value="Viernes"> Viernes
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="disponibilidad[]" value="Sábado"> Sábado
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="disponibilidad[]" value="Domingo"> Domingo
+            </label>
+          </div>
+          <textarea class="form-control" id="disponibilidad_detalles" placeholder="Especifica horarios preferidos y cualquier detalle adicional sobre tu disponibilidad..." style="margin-top:0.75rem;"></textarea>
+          <div class="error-message" id="disponibilidad-error">Por favor, selecciona al menos un día y proporciona más detalles sobre tu disponibilidad (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Podrías mudarte temporalmente por el proyecto si fuera necesario?</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="mudanza" value="Sí, sin problema"> Sí, sin problema
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="mudanza" value="Depende del tiempo"> Depende del tiempo
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="mudanza" value="Tendría que evaluarlo"> Tendría que evaluarlo
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="mudanza" value="No podría"> No podría
+            </label>
+          </div>
+          <textarea class="form-control" id="mudanza_razon" placeholder="Explica tu respuesta..." style="margin-top:0.75rem;"></textarea>
+          <div class="error-message" id="mudanza-error">Por favor, selecciona una opción y explica tu respuesta con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Qué significa para ti formar parte de Somos Tu Y Yo?</label>
+          <textarea class="form-control" id="significado_proyecto" placeholder="Explica lo que representaría para ti ser parte del elenco..."></textarea>
+          <div class="error-message" id="significado-error">Por favor, explica lo que significaría para ti con más detalle (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">¿Algo más que quieras que sepamos de ti?</label>
+          <textarea class="form-control" id="comentario_adicional" placeholder="Comparte cualquier información adicional que consideres relevante..."></textarea>
+          <div class="error-message" id="comentario-error">Por favor, proporciona información adicional más detallada (mínimo 20 palabras).</div>
+        </div>
+        
+        <div class="btn-container">
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow secondary" onclick="prevSection(5)">
+              <div class="btn-glow-content btn-glow-initial">
+                Atrás
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Atrás
+                <i class="fas fa-arrow-left btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+          
+          <div class="btn-glow-container">
+            <div class="btn-glow-effect"></div>
+            <button class="btn-glow success" onclick="submitForm()">
+              <div class="btn-glow-content btn-glow-initial">
+                Enviar
+              </div>
+              <div class="btn-glow-content btn-glow-hover">
+                Enviar
+                <i class="fas fa-check btn-glow-icon"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Section -->
+      <div class="form-section success-section" id="successSection">
+        <div class="success-card" id="successCard">
+          <div class="success-icon">
+            <i class="fas fa-check"></i>
+          </div>
+          <h2>¡Solicitud Completada!</h2>
+          <p>¡Gracias por participar en el proceso de casting de Somos Tu Y Yo! Tu información ha sido enviada con éxito.</p>
+          <p>Nuestro equipo de producción revisará tu perfil y los videos enviados. Si eres seleccionado/a, te contactaremos a través del correo o teléfono proporcionado en un plazo de 7 días.</p>
+          <p>¡Mucha suerte y gracias por tu interés!</p>
+          
+          <div class="social-links">
+            <a href="https://www.venevision.com" target="_blank" class="social-link venevision">
+              <i class="fas fa-tv"></i>
+            </a>
+            <a href="https://www.instagram.com/somostuyyooficial/" target="_blank" class="social-link instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/c/somostuyyooficial" target="_blank" class="social-link youtube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://twitter.com/somostuyyoofic" target="_blank" class="social-link twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+          
+          <div class="btn-container center">
+            <div class="btn-glow-container" style="width: 180px;">
+              <div class="btn-glow-effect"></div>
+              <button class="btn-glow success" onclick="finishCasting()">
+                <div class="btn-glow-content btn-glow-initial">
+                  Finalizar
+                </div>
+                <div class="btn-glow-content btn-glow-hover">
+                  Finalizar
+                  <i class="fas fa-heart btn-glow-icon"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    // Variables
+    let formData = {
+      section1: {},
+      section2: {},
+      section3: {},
+      section4: {},
+      section5: {}
+    };
+    
+    // Mostrar el contenedor con animación
+    document.addEventListener('DOMContentLoaded', function() {
+      // Simular carga inicial
+      document.getElementById('loadingOverlay').classList.add('active');
+      
+      setTimeout(function() {
+        document.getElementById('loadingOverlay').classList.remove('active');
+        document.getElementById('mainContainer').classList.add('active');
+      }, 1500);
+      
+      // Configurar eventos para inputs condicionales
+      setupConditionalInputs();
+      
+      // Inicializar tooltips
+      setupTooltips();
+    });
+    
+    // Configurar inputs condicionales
+    function setupConditionalInputs() {
+      // Personaje "Otro"
+      document.getElementById('personaje_otro_container').addEventListener('input', function() {
+        validateInput(this, 'personaje-identificado-error');
+      });
+      
+      // Habilidad "Otro"
+      const habilidadRadios = document.querySelectorAll('input[name="habilidad_desarrollar"]');
+      habilidadRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          const container = document.getElementById('habilidad_otra_container');
+          if (this.value === 'Otro') {
+            container.classList.add('active');
+          } else {
+            container.classList.remove('active');
+          }
+        });
+      });
+      
+      // Sentimiento "Otro"
+      document.getElementById('sentimiento_otro_container').addEventListener('input', function() {
+        validateInput(this, 'sentimiento-error');
+      });
+    }
+    
+    // Configurar tooltips
+    function setupTooltips() {
+      const tooltips = document.querySelectorAll('.tooltip');
+      tooltips.forEach(tooltip => {
+        tooltip.addEventListener('mouseenter', () => {
+          const tooltipText = tooltip.querySelector('.tooltip-text');
+          tooltipText.style.visibility = 'visible';
+          tooltipText.style.opacity = '1';
+        });
+        
+        tooltip.addEventListener('mouseleave', () => {
+          const tooltipText = tooltip.querySelector('.tooltip-text');
+          tooltipText.style.visibility = 'hidden';
+          tooltipText.style.opacity = '0';
+        });
+      });
+    }
+    
+    // Verificar cantidad de palabras
+    function countWords(str) {
+      if (!str) return 0;
+      return str.trim().split(/\s+/).length;
+    }
+    
+    // Validar entrada de texto mínima
+    function validateTextMinLength(value, minWords) {
+      return countWords(value) >= minWords;
+    }
+    
+    // Validar si la entrada es spam o sin sentido
+    function validateMeaningfulText(text) {
+      if (!text) return false;
+      
+      // Verificar si es solo letras repetidas o caracteres sin sentido
+      const repeatedPattern = /(.)\1{4,}/;
+      if (repeatedPattern.test(text)) return false;
+      
+      // Verificar longitud mínima
+      if (text.length < 10) return false;
+      
+      // Verificar variedad de caracteres (no solo "asdf" o similar)
+      const uniqueChars = new Set(text.toLowerCase().split('')).size;
+      if (uniqueChars < 8) return false;
+      
+      return true;
+    }
+    
+    // Actualizar tarjeta de usuario
+    function updateUserCard() {
+      const nombre = document.getElementById('nombre_completo').value;
+      const edad = document.getElementById('edad').value;
+      const nacionalidad = document.getElementById('nacionalidad').value;
+      const talentos = document.getElementById('talentos').value;
+      
+      if (nombre) {
+        const iniciales = nombre.split(' ').map(n => n[0]).join('').toUpperCase();
+        document.getElementById('userAvatar').textContent = iniciales;
+        document.getElementById('userName').textContent = nombre;
+      }
+      
+      if (edad) document.getElementById('userAge').textContent = edad;
+      if (nacionalidad) document.getElementById('userNationality').textContent = nacionalidad;
+      if (talentos) document.getElementById('userTalentSummary').textContent = talentos;
+    }
+    
+    // Gestión de navegación entre secciones
+    function nextSection(currentSection) {
+      // Validar el formulario actual
+      if (!validateSection(currentSection)) {
+        return;
+      }
+      
+      // Recopilar datos del formulario
+      collectFormData(currentSection);
+      
+      // Si estamos en la sección 1, actualizar la tarjeta de usuario
+      if (currentSection === 1) {
+        updateUserCard();
+      }
+      
+      // Actualizar barra de progreso
+      const nextStep = currentSection + 1;
+      document.getElementById('currentStep').innerText = nextStep;
+      document.getElementById('progressBar').style.width = (nextStep * 20) + '%';
+      
+      // Actualizar indicadores de paso
+      updateStepIndicators(nextStep);
+      
+      // Simular breve carga
+      showLoading();
+      
+      setTimeout(() => {
+        hideLoading();
+        
+        // Ocultar sección actual y mostrar siguiente
+        document.getElementById('section' + currentSection).style.display = 'none';
+        const nextSectionElem = document.getElementById('section' + nextStep);
+        
+        if (nextStep <= 5) {
+          nextSectionElem.style.display = 'block';
+          setTimeout(() => {
+            nextSectionElem.classList.add('active');
+          }, 50);
+        } else {
+          // Mostrar sección de éxito
+          document.getElementById('successSection').style.display = 'block';
+          setTimeout(() => {
+            document.getElementById('successSection').classList.add('active');
+            document.getElementById('successCard').classList.add('active');
+          }, 50);
+        }
+      }, 800);
+    }
+    
+    function prevSection(currentSection) {
+      // Recopilar datos del formulario actual
+      collectFormData(currentSection);
+      
+      const prevStep = currentSection - 1;
+      document.getElementById('currentStep').innerText = prevStep;
+      document.getElementById('progressBar').style.width = (prevStep * 20) + '%';
+      
+      // Actualizar indicadores de paso
+      updateStepIndicators(prevStep);
+      
+      // Ocultar sección actual y mostrar anterior
+      document.getElementById('section' + currentSection).classList.remove('active');
+      setTimeout(() => {
+        document.getElementById('section' + currentSection).style.display = 'none';
+        document.getElementById('section' + prevStep).style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('section' + prevStep).classList.add('active');
+        }, 50);
+      }, 300);
+    }
+    
+    function updateStepIndicators(currentStep) {
+      const steps = document.querySelectorAll('.step');
+      steps.forEach(step => {
+        const stepNum = parseInt(step.getAttribute('data-step'));
+        step.classList.remove('active', 'completed');
+        if (stepNum === currentStep) {
+          step.classList.add('active');
+        } else if (stepNum < currentStep) {
+          step.classList.add('completed');
+        }
+      });
+    }
+    
+    // Validación de formulario por sección
+    function validateSection(sectionNum) {
+      let isValid = true;
+      
+      // Restablecer mensajes de error
+      const errorMessages = document.querySelectorAll('.error-message');
+      errorMessages.forEach(msg => {
+        msg.classList.remove('active');
+      });
+      
+      const errorFields = document.querySelectorAll('.form-control.error');
+      errorFields.forEach(field => {
+        field.classList.remove('error');
+      });
+      
+      // Validación específica por sección
+      if (sectionNum === 1) {
+        // Validar Sección 1: Personalidad y Creatividad
+        if (!document.getElementById('nombre_completo').value) {
+          document.getElementById('nombre_completo').classList.add('error');
+          document.getElementById('nombre-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const edad = document.getElementById('edad').value;
+        if (!edad || edad < 13 || edad > 30) {
+          document.getElementById('edad').classList.add('error');
+          document.getElementById('edad-error').classList.add('active');
+          isValid = false;
+        }
+        
+        if (!document.getElementById('nacionalidad').value) {
+          document.getElementById('nacionalidad').classList.add('error');
+          document.getElementById('nacionalidad-error').classList.add('active');
+          isValid = false;
+        }
+        
+        if (!document.getElementById('talentos').value) {
+          document.getElementById('talentos').classList.add('error');
+          document.getElementById('talentos-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const fortaleza = document.getElementById('fortaleza').value;
+        if (!fortaleza || !validateTextMinLength(fortaleza, 20) || !validateMeaningfulText(fortaleza)) {
+          document.getElementById('fortaleza').classList.add('error');
+          document.getElementById('fortaleza-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const inspiracion = document.getElementById('inspiracion').value;
+        if (!inspiracion || !validateTextMinLength(inspiracion, 20) || !validateMeaningfulText(inspiracion)) {
+          document.getElementById('inspiracion').classList.add('error');
+          document.getElementById('inspiracion-error').classList.add('active');
+          isValid = false;
+        }
+      } else if (sectionNum === 2) {
+        // Validar Sección 2: Habilidades y Creatividad
+        if (!document.getElementById('presion_valor').value) {
+          document.getElementById('presion-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const cualidadUnica = document.getElementById('cualidad_unica').value;
+        if (!cualidadUnica || !validateTextMinLength(cualidadUnica, 20) || !validateMeaningfulText(cualidadUnica)) {
+          document.getElementById('cualidad_unica').classList.add('error');
+          document.getElementById('cualidad-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const miedoEscenico = document.getElementById('miedo_escenico').value;
+        if (!miedoEscenico || !validateTextMinLength(miedoEscenico, 20) || !validateMeaningfulText(miedoEscenico)) {
+          document.getElementById('miedo_escenico').classList.add('error');
+          document.getElementById('miedo-error').classList.add('active');
+          isValid = false;
+        }
+        
+        // Validar selección de color y explicación
+        if (!document.getElementById('color_personalidad').value || 
+            !validateTextMinLength(document.getElementById('color_razon').value, 20) ||
+            !validateMeaningfulText(document.getElementById('color_razon').value)) {
+          document.getElementById('color_razon').classList.add('error');
+          document.getElementById('color-error').classList.add('active');
+          isValid = false;
+        }
+      } else if (sectionNum === 3) {
+        // Validar Sección 3: Conexión con la Serie
+        const escenaFavorita = document.getElementById('escena_favorita').value;
+        if (!escenaFavorita || !validateTextMinLength(escenaFavorita, 20) || !validateMeaningfulText(escenaFavorita)) {
+          document.getElementById('escena_favorita').classList.add('error');
+          document.getElementById('escena-error').classList.add('active');
+          isValid = false;
+        }
+        
+        if (!document.querySelector('input[name="rating"]:checked')) {
+          document.getElementById('rating-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const nuevoPersonaje = document.getElementById('nuevo_personaje').value;
+        if (!nuevoPersonaje || !validateTextMinLength(nuevoPersonaje, 20) || !validateMeaningfulText(nuevoPersonaje)) {
+          document.getElementById('nuevo_personaje').classList.add('error');
+          document.getElementById('personaje-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const personajeIdentificado = document.getElementById('personaje_identificado').value;
+        const personajeRazon = document.getElementById('personaje_razon').value;
+        
+        if (!personajeIdentificado || !validateTextMinLength(personajeRazon, 20) || !validateMeaningfulText(personajeRazon)) {
+          document.getElementById('personaje_razon').classList.add('error');
+          document.getElementById('personaje-identificado-error').classList.add('active');
+          isValid = false;
+        }
+        
+        if (personajeIdentificado === 'Otro' && !document.getElementById('personaje_otro').value) {
+          document.getElementById('personaje_otro').classList.add('error');
+          document.getElementById('personaje-identificado-error').classList.add('active');
+          isValid = false;
+        }
+      } else if (sectionNum === 4) {
+        // Validar Sección 4: Desafíos y Habilidades
+        const desafioSuperado = document.getElementById('desafio_superado').value;
+        if (!desafioSuperado || !validateTextMinLength(desafioSuperado, 20) || !validateMeaningfulText(desafioSuperado)) {
+          document.getElementById('desafio_superado').classList.add('error');
+          document.getElementById('desafio-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const habilidadChecked = document.querySelector('input[name="habilidad_desarrollar"]:checked');
+        const habilidadRazon = document.getElementById('habilidad_razon').value;
+        
+        if (!habilidadChecked || !validateTextMinLength(habilidadRazon, 20) || !validateMeaningfulText(habilidadRazon)) {
+          document.getElementById('habilidad_razon').classList.add('error');
+          document.getElementById('habilidad-error').classList.add('active');
+          isValid = false;
+        }
+        
+        if (habilidadChecked && habilidadChecked.value === 'Otro' && !document.getElementById('habilidad_otra').value) {
+          document.getElementById('habilidad_otra').classList.add('error');
+          document.getElementById('habilidad-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const cancionFavorita = document.getElementById('cancion_favorita').value;
+        const cancionRazon = document.getElementById('cancion_razon').value;
+        
+        if (!cancionFavorita || !validateTextMinLength(cancionRazon, 20) || !validateMeaningfulText(cancionRazon)) {
+          document.getElementById('cancion_favorita').classList.add('error');
+          document.getElementById('cancion_razon').classList.add('error');
+          document.getElementById('cancion-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const sentimientoValor = document.getElementById('sentimiento_valor').value;
+        const sentimientoExplicacion = document.getElementById('sentimiento_explicacion').value;
+        
+        if (!sentimientoValor || !validateTextMinLength(sentimientoExplicacion, 20) || !validateMeaningfulText(sentimientoExplicacion)) {
+          document.getElementById('sentimiento_explicacion').classList.add('error');
+          document.getElementById('sentimiento-error').classList.add('active');
+          isValid = false;
+        }
+        
+        if (sentimientoValor === 'Otro' && !document.getElementById('sentimiento_otro').value) {
+          document.getElementById('sentimiento_otro').classList.add('error');
+          document.getElementById('sentimiento-error').classList.add('active');
+          isValid = false;
+        }
+      } else if (sectionNum === 5) {
+        // Validar Sección 5: Compromiso y Disponibilidad
+        const aparienciaChecked = document.querySelector('input[name="cambio_apariencia"]:checked');
+        const aparienciaRazon = document.getElementById('apariencia_razon').value;
+        
+        if (!aparienciaChecked || !validateTextMinLength(aparienciaRazon, 20) || !validateMeaningfulText(aparienciaRazon)) {
+          document.getElementById('apariencia_razon').classList.add('error');
+          document.getElementById('apariencia-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const disponibilidadChecked = document.querySelectorAll('input[name="disponibilidad[]"]:checked');
+        const disponibilidadDetalles = document.getElementById('disponibilidad_detalles').value;
+        
+        if (disponibilidadChecked.length === 0 || !validateTextMinLength(disponibilidadDetalles, 20) || !validateMeaningfulText(disponibilidadDetalles)) {
+          document.getElementById('disponibilidad_detalles').classList.add('error');
+          document.getElementById('disponibilidad-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const mudanzaChecked = document.querySelector('input[name="mudanza"]:checked');
+        const mudanzaRazon = document.getElementById('mudanza_razon').value;
+        
+        if (!mudanzaChecked || !validateTextMinLength(mudanzaRazon, 20) || !validateMeaningfulText(mudanzaRazon)) {
+          document.getElementById('mudanza_razon').classList.add('error');
+          document.getElementById('mudanza-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const significadoProyecto = document.getElementById('significado_proyecto').value;
+        if (!significadoProyecto || !validateTextMinLength(significadoProyecto, 20) || !validateMeaningfulText(significadoProyecto)) {
+          document.getElementById('significado_proyecto').classList.add('error');
+          document.getElementById('significado-error').classList.add('active');
+          isValid = false;
+        }
+        
+        const comentarioAdicional = document.getElementById('comentario_adicional').value;
+        if (!comentarioAdicional || !validateTextMinLength(comentarioAdicional, 20) || !validateMeaningfulText(comentarioAdicional)) {
+          document.getElementById('comentario_adicional').classList.add('error');
+          document.getElementById('comentario-error').classList.add('active');
+          isValid = false;
+        }
+      }
+      
+      if (!isValid) {
+        showNotification('Atención', 'Por favor, completa todos los campos de forma detallada.', 'error');
+      }
+      
+      return isValid;
+    }
+    
+    // Recopilar datos del formulario
+    function collectFormData(sectionNum) {
+      if (sectionNum === 1) {
+        formData.section1 = {
+          nombre_completo: document.getElementById('nombre_completo').value,
+          edad: document.getElementById('edad').value,
+          nacionalidad: document.getElementById('nacionalidad').value,
+          talentos: document.getElementById('talentos').value,
+          fortaleza: document.getElementById('fortaleza').value,
+          inspiracion: document.getElementById('inspiracion').value
+        };
+      } else if (sectionNum === 2) {
+        formData.section2 = {
+          presion_valor: document.getElementById('presion_valor').value,
+          cualidad_unica: document.getElementById('cualidad_unica').value,
+          miedo_escenico: document.getElementById('miedo_escenico').value,
+          color_personalidad: document.getElementById('color_personalidad').value,
+          color_razon: document.getElementById('color_razon').value
+        };
+      } else if (sectionNum === 3) {
+        const ratingChecked = document.querySelector('input[name="rating"]:checked');
+        
+        formData.section3 = {
+          escena_favorita: document.getElementById('escena_favorita').value,
+          rating: ratingChecked ? ratingChecked.value : '',
+          nuevo_personaje: document.getElementById('nuevo_personaje').value,
+          personaje_identificado: document.getElementById('personaje_identificado').value,
+          personaje_otro: document.getElementById('personaje_otro').value,
+          personaje_razon: document.getElementById('personaje_razon').value
+        };
+      } else if (sectionNum === 4) {
+        const habilidadChecked = document.querySelector('input[name="habilidad_desarrollar"]:checked');
+        
+        formData.section4 = {
+          desafio_superado: document.getElementById('desafio_superado').value,
+          improvisacion_valor: document.getElementById('improvisacion_valor').value,
+          habilidad_desarrollar: habilidadChecked ? habilidadChecked.value : '',
+          habilidad_otra: document.getElementById('habilidad_otra').value,
+          habilidad_razon: document.getElementById('habilidad_razon').value,
+          cancion_favorita: document.getElementById('cancion_favorita').value,
+          cancion_razon: document.getElementById('cancion_razon').value,
+          sentimiento_valor: document.getElementById('sentimiento_valor').value,
+          sentimiento_otro: document.getElementById('sentimiento_otro').value,
+          sentimiento_explicacion: document.getElementById('sentimiento_explicacion').value
+        };
+      } else if (sectionNum === 5) {
+        const aparienciaChecked = document.querySelector('input[name="cambio_apariencia"]:checked');
+        const disponibilidadChecked = document.querySelectorAll('input[name="disponibilidad[]"]:checked');
+        const mudanzaChecked = document.querySelector('input[name="mudanza"]:checked');
+        
+        const disponibilidad = Array.from(disponibilidadChecked).map(cb => cb.value);
+        
+        formData.section5 = {
+          cambio_apariencia: aparienciaChecked ? aparienciaChecked.value : '',
+          apariencia_razon: document.getElementById('apariencia_razon').value,
+          disponibilidad: disponibilidad,
+          disponibilidad_detalles: document.getElementById('disponibilidad_detalles').value,
+          mudanza: mudanzaChecked ? mudanzaChecked.value : '',
+          mudanza_razon: document.getElementById('mudanza_razon').value,
+          significado_proyecto: document.getElementById('significado_proyecto').value,
+          comentario_adicional: document.getElementById('comentario_adicional').value
+        };
+      }
+      
+      console.log('Datos del formulario actualizados:', formData);
+    }
+    
+    // Selección de emojis
+    function selectEmoji(element) {
+      // Eliminar selección previa
+      const emojis = document.querySelectorAll('.emoji');
+      emojis.forEach(emoji => emoji.classList.remove('selected'));
+      
+      // Seleccionar actual
+      element.classList.add('selected');
+      
+      // Guardar valor
+      document.getElementById('presion_valor').value = element.getAttribute('data-value');
+      
+      // Ocultar mensaje de error si existe
+      document.getElementById('presion-error').classList.remove('active');
+    }
+    
+    // Selección de color
+    function selectColor(element) {
+      // Eliminar selección previa
+      const colors = document.querySelectorAll('.color-option');
+      colors.forEach(color => color.classList.remove('selected'));
+      
+      // Seleccionar actual
+      element.classList.add('selected');
+      
+      // Guardar valor
+      document.getElementById('color_personalidad').value = element.getAttribute('data-color');
+      
+      // Ocultar mensaje de error si existe
+      document.getElementById('color-error').classList.remove('active');
+    }
+    
+    // Selección de personaje
+    function selectCharacter(element, value) {
+      // Eliminar selección previa
+      const characters = document.querySelectorAll('.character-option');
+      characters.forEach(char => char.classList.remove('selected'));
+      
+      // Seleccionar actual
+      element.classList.add('selected');
+      
+      // Guardar valor
+      document.getElementById('personaje_identificado').value = value;
+      
+      // Mostrar/ocultar campo adicional
+      const container = document.getElementById('personaje_otro_container');
+      if (value === 'Otro') {
+        container.classList.add('active');
+      } else {
+        container.classList.remove('active');
+      }
+      
+      // Ocultar mensaje de error si existe
+      document.getElementById('personaje-identificado-error').classList.remove('active');
+    }
+    
+    // Selección de sentimiento
+    function selectFeeling(element, value) {
+      // Eliminar selección previa
+      const feelings = document.querySelectorAll('.feeling-option');
+      feelings.forEach(feeling => feeling.classList.remove('selected'));
+      
+      // Seleccionar actual
+      element.classList.add('selected');
+      
+      // Guardar valor
+      document.getElementById('sentimiento_valor').value = value;
+      
+      // Mostrar/ocultar campo adicional
+      const container = document.getElementById('sentimiento_otro_container');
+      if (value === 'Otro') {
+        container.classList.add('active');
+      } else {
+        container.classList.remove('active');
+      }
+      
+      // Ocultar mensaje de error si existe
+      document.getElementById('sentimiento-error').classList.remove('active');
+    }
+    
+    // Actualizar valor de range slider
+    function updateRangeValue(element) {
+      const value = element.value;
+      const rangeValueElement = element.parentNode.querySelector('.range-value');
+      rangeValueElement.textContent = value;
+      
+      // Posicionar el valor
+      const percent = ((value - element.min) / (element.max - element.min)) * 100;
+      rangeValueElement.style.left = `calc(${percent}% + (${8 - percent * 0.15}px))`;
+    }
+    
+    // Validar input de texto
+    function validateInput(element, errorId) {
+      const value = element.value.trim();
+      const errorMessage = document.getElementById(errorId);
+      
+      if (!value) {
+        element.classList.add('error');
+        errorMessage.classList.add('active');
+        return false;
+      } else {
+        element.classList.remove('error');
+        errorMessage.classList.remove('active');
+        return true;
+      }
+    }
+    
+    // Mostrar/ocultar overlay de carga
+    function showLoading() {
+      document.getElementById('loadingOverlay').classList.add('active');
+    }
+    
+    function hideLoading() {
+      document.getElementById('loadingOverlay').classList.remove('active');
+    }
+    
+    // Mostrar notificación
+    function showNotification(title, message, type = 'success') {
+      const notification = document.getElementById('notification');
+      const icon = document.getElementById('notificationIcon');
+      
+      document.getElementById('notificationTitle').textContent = title;
+      document.getElementById('notificationText').textContent = message;
+      
+      if (type === 'error') {
+        icon.className = 'notification-icon error';
+        icon.innerHTML = '<i class="fas fa-times"></i>';
+      } else {
+        icon.className = 'notification-icon';
+        icon.innerHTML = '<i class="fas fa-check"></i>';
+      }
+      
+      notification.classList.add('active');
+      
+      setTimeout(() => {
+        notification.classList.remove('active');
+      }, 4000);
+    }
+    
+    // Función para crear confeti
+    function launchConfetti() {
+      // Verificar si existe el canvas
+      const canvas = document.getElementById('confetti-canvas');
+      const context = canvas.getContext('2d');
+      
+      // Dimensiones del canvas
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Propiedades para el confeti
+      const pieces = [];
+      const numberOfPieces = 200;
+      const colors = ['#f94144', '#f3722c', '#f8961e', '#f9c74f', '#90be6d', '#43aa8b', '#577590', '#277da1'];
+      
+      // Crear piezas de confeti
+      for (let i = 0; i < numberOfPieces; i++) {
+        pieces.push({
+          x: Math.random() * canvas.width, // posición x inicial
+          y: -20, // inicia justo arriba de la pantalla
+          size: Math.random() * 20 + 5, // tamaño aleatorio
+          color: colors[Math.floor(Math.random() * colors.length)],
+          shape: ['circle', 'square', 'triangle'][Math.floor(Math.random() * 3)],
+          vx: Math.random() * 2 - 1, // velocidad x
+          vy: Math.random() * 5 + 1, // velocidad y (caída)
+          rotation: Math.random() * 360, // rotación inicial
+          rotationSpeed: Math.random() * 5 - 2.5 // velocidad de rotación
+        });
+      }
+      
+      // Función de animación
+      function animate() {
+        // Limpiar canvas
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Actualizar y dibujar cada pieza
+        pieces.forEach(piece => {
+          // Actualizar posición
+          piece.x += piece.vx;
+          piece.y += piece.vy;
+          piece.rotation += piece.rotationSpeed;
+          
+          // Dibujar pieza según forma
+          context.save();
+          context.translate(piece.x, piece.y);
+          context.rotate(piece.rotation * Math.PI / 180);
+          context.fillStyle = piece.color;
+          
+          if (piece.shape === 'circle') {
+            context.beginPath();
+            context.arc(0, 0, piece.size / 2, 0, Math.PI * 2);
+            context.fill();
+          } else if (piece.shape === 'square') {
+            context.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size);
+          } else if (piece.shape === 'triangle') {
+            context.beginPath();
+            context.moveTo(0, -piece.size / 2);
+            context.lineTo(piece.size / 2, piece.size / 2);
+            context.lineTo(-piece.size / 2, piece.size / 2);
+            context.closePath();
+            context.fill();
+          }
+          
+          context.restore();
+        });
+        
+        // Verificar si hay piezas visibles en la pantalla
+        const activePieces = pieces.filter(p => p.y < canvas.height + 100);
+        
+        if (activePieces.length > 0) {
+          requestAnimationFrame(animate);
+        } else {
+          // Limpiar canvas cuando todas las piezas han caído
+          context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      
+      // Iniciar animación
+      animate();
+    }
+    
+    // Envío del formulario
+    function submitForm() {
+      // Validar el formulario
+      if (!validateSection(5)) {
+        return;
+      }
+      
+      // Recopilar datos finales
+      collectFormData(5);
+      
+      // Mostrar overlay de carga
+      showLoading();
+      document.getElementById('loadingOverlay').querySelector('.loading-text').textContent = 'Enviando información...';
+      
+      // Simular envío al servidor (3 segundos)
+      setTimeout(() => {
+        // Ocultar overlay de carga
+        hideLoading();
+        
+        // Actualizar progreso
+        document.getElementById('progressBar').style.width = '100%';
+        document.getElementById('currentStep').textContent = '5';
+        updateStepIndicators(5);
+        
+        // Mostrar sección de éxito
+        document.getElementById('section5').style.display = 'none';
+        document.getElementById('successSection').style.display = 'block';
+        
+        setTimeout(() => {
+          document.getElementById('successSection').classList.add('active');
+          document.getElementById('successCard').classList.add('active');
+          
+          // Lanzar confeti
+          launchConfetti();
+        }, 200);
+      }, 3000);
+    }
+    
+    // Finalizar casting
+    function finishCasting() {
+      // Mostrar mensaje de despedida
+      showNotification('¡Éxito!', 'Gracias por participar en nuestro casting. ¡Buena suerte!');
+      
+      // Redirigir a página principal después de un breve retraso
+      setTimeout(() => {
+        // Aquí se redireccionaría a la página principal
+        // window.location.href = 'https://www.venevision.com';
+        
+        // Para el ejemplo, simplemente recargaremos la página
+        window.location.reload();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

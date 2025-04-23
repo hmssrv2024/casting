@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casting de Somos Tú y Yo - Experiencia Inmersiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset y estilos base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            /* Paleta de colores mejorada */
+            --primary: #7c00ff;
+            --secondary: #ff3399;
+            --accent: #00e1ff;
+            --dark: #120338;
+            --light: #ffffff;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-accent: linear-gradient(135deg, var(--secondary), var(--accent));
+            
+            /* Tiempos de animación */
+            --transition-fast: 0.3s;
+            --transition-medium: 0.6s;
+            --transition-slow: 1s;
+            
+            /* Variables de animación de burbujas */
+            --color-bg1: rgb(108, 0, 162);
+            --color-bg2: rgb(0, 17, 82);
+            --color1: 18, 113, 255;
+            --color2: 221, 74, 255;
+            --color3: 100, 220, 255;
+            --color4: 200, 50, 50;
+            --color5: 180, 180, 50;
+            --color-interactive: 140, 100, 255;
+            --circle-size: 80%;
+            --blending: hard-light;
+            
+            /* Variables de animación de ondas */
+            --size: 140deg;
+            --count: 24;
+            --per-item: calc(50% / 24);
+            --p-per-item: calc(1 / 24);
+        }
+        
+        @property --a {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: true;
+        }
+        
+        @property --angle {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: 0deg;
+        }
+        
+        @property --wave-progress {
+            syntax: "<number>";
+            initial-value: 0;
+            inherits: false;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            background-color: var(--dark);
+            color: var(--light);
+            scroll-behavior: smooth;
+        }
+        
+        /* Animaciones de fondo dinámicas mejoradas */
+        
+        /* Estilos de animación de burbujas con mejor rendimiento */
+        .gradient-bg {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+            z-index: -2;
+        }
+        
+        .gradient-bg svg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .gradients-container {
+            filter: url(#goo) blur(40px);
+            width: 100%;
+            height: 100%;
+            will-change: transform;
+        }
+        
+        .g1, .g2, .g3, .g4, .g5 {
+            position: absolute;
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2);
+            left: calc(50% - var(--circle-size) / 2);
+            mix-blend-mode: var(--blending);
+            will-change: transform;
+        }
+        
+        .g1 {
+            background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+            transform-origin: center center;
+            animation: moveVertical 30s ease infinite;
+        }
+        
+        .g2 {
+            background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+            transform-origin: calc(50% - 400px);
+            animation: moveInCircle 20s reverse infinite;
+        }
+        
+        .g3 {
+            background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+            top: calc(50% - var(--circle-size) / 2 + 200px);
+            left: calc(50% - var(--circle-size) / 2 - 500px);
+            transform-origin: calc(50% + 400px);
+            animation: moveInCircle 40s linear infinite;
+        }
+        
+        .g4 {
+            background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+            transform-origin: calc(50% - 200px);
+            animation: moveHorizontal 40s ease infinite;
+            opacity: 0.7;
+        }
+        
+        .g5 {
+            background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+            width: calc(var(--circle-size) * 2);
+            height: calc(var(--circle-size) * 2);
+            top: calc(50% - var(--circle-size));
+            left: calc(50% - var(--circle-size));
+            transform-origin: calc(50% - 800px) calc(50% + 200px);
+            animation: moveInCircle 20s ease infinite;
+        }
+        
+        .interactive {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+            width: 100%;
+            height: 100%;
+            top: -50%;
+            left: -50%;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        @keyframes moveInCircle {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes moveVertical {
+            0% { transform: translateY(-50%); }
+            50% { transform: translateY(50%); }
+            100% { transform: translateY(-50%); }
+        }
+        
+        @keyframes moveHorizontal {
+            0% { transform: translateX(-50%) translateY(-10%); }
+            50% { transform: translateX(50%) translateY(10%); }
+            100% { transform: translateX(-50%) translateY(-10%); }
+        }
+        
+        /* Animación de onda mejorada con integración cromática */
+        .wave-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40vh;
+            z-index: -1;
+            opacity: 0.6;
+            animation: fadeIn 2s ease forwards;
+            pointer-events: none;
+        }
+        
+        .wave-animation {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            animation: waveMain 8s cubic-bezier(0.65, 0.05, 0.36, 1) infinite;
+        }
+        
+        @keyframes waveMain {
+            from { --a: 0deg; }
+            to { --a: 360deg; }
+        }
+        
+        .col {
+            flex: 1;
+            --a-per-item: calc(var(--size) / var(--count) * var(--i) - var(--a));
+            --pos1: calc(50% * cos(var(--a-per-item)));
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 51, 153, 0.3),
+                rgba(124, 0, 255, 0.3) var(--pos1),
+                rgba(0, 225, 255, 0.3) 50%,
+                rgba(124, 0, 255, 0.3) calc(100% - var(--pos1)),
+                rgba(255, 51, 153, 0.3)
+            );
+            will-change: background;
+        }
+        
+        /* Columnas para la onda */
+        .col:nth-child(1) { --i: 0; }
+        .col:nth-child(2) { --i: 1; }
+        .col:nth-child(3) { --i: 2; }
+        .col:nth-child(4) { --i: 3; }
+        .col:nth-child(5) { --i: 4; }
+        .col:nth-child(6) { --i: 5; }
+        .col:nth-child(7) { --i: 6; }
+        .col:nth-child(8) { --i: 7; }
+        .col:nth-child(9) { --i: 8; }
+        .col:nth-child(10) { --i: 9; }
+        .col:nth-child(11) { --i: 10; }
+        .col:nth-child(12) { --i: 11; }
+        .col:nth-child(13) { --i: 12; }
+        .col:nth-child(14) { --i: 13; }
+        .col:nth-child(15) { --i: 14; }
+        .col:nth-child(16) { --i: 15; }
+        .col:nth-child(17) { --i: 16; }
+        .col:nth-child(18) { --i: 17; }
+        .col:nth-child(19) { --i: 18; }
+        .col:nth-child(20) { --i: 19; }
+        .col:nth-child(21) { --i: 20; }
+        .col:nth-child(22) { --i: 21; }
+        .col:nth-child(23) { --i: 22; }
+        .col:nth-child(24) { --i: 23; }
+        
+        /* Efecto de ruido superpuesto más sutil */
+        body:after {
+            content: "";
+            opacity: .1;
+            position: fixed;
+            background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1IiBkPSJNMCAwaDMwMHYzMDBIMHoiLz48L3N2Zz4=");
+            mix-blend-mode: overlay;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Estilos del contenedor principal con mayor profundidad */
+        .main-container {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            perspective: 1000px;
+        }
+        
+        /* Estilos del encabezado mejorado */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(10px);
+        }
+        
+        header.scrolled {
+            background-color: rgba(18, 3, 56, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            height: 50px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+            transition: transform var(--transition-fast), filter var(--transition-fast);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) translateY(-2px);
+            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.5)) brightness(1.2);
+        }
+        
+        /* Contenedor del formulario de inicio de sesión con efectos 3D */
+        .auth-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            perspective: 1200px;
+        }
+        
+        .login-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 30px rgba(255, 255, 255, 0.03);
+            text-align: center;
+            transform: translateY(20px) rotateX(5deg);
+            opacity: 0;
+            animation: cardIntro 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        
+        @keyframes cardIntro {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) rotateX(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+        
+        /* Efecto de iluminación en tarjeta */
+        .login-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%), 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0) 60%
+            );
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        
+        .login-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Efecto de borde brillante */
+        .login-card::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 26px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 51, 153, 0.5) 0%,
+                rgba(124, 0, 255, 0.5) 25%, 
+                rgba(0, 225, 255, 0.5) 50%,
+                rgba(124, 0, 255, 0.5) 75%,
+                rgba(255, 51, 153, 0.5) 100%
+            );
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .login-card:hover::after {
+            opacity: 0.5;
+        }
+        
+        .login-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+        
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .welcome-title {
+            color: var(--light);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+        
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 
+                    0 0 10px rgba(124, 0, 255, 0.5),
+                    0 0 20px rgba(124, 0, 255, 0);
+            }
+            100% {
+                text-shadow: 
+                    0 0 15px rgba(124, 0, 255, 0.8),
+                    0 0 30px rgba(124, 0, 255, 0.4);
+            }
+        }
+        
+        .welcome-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 1s 0.5s both;
+        }
+        
+        /* Campos de formulario mejorados */
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 0 0 3px rgba(0, 225, 255, 0.25),
+                inset 0 2px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            transition: opacity 0.3s;
+        }
+        
+        .form-input:focus::placeholder {
+            opacity: 0.7;
+        }
+        
+        /* Icono del formulario animado */
+        .form-icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            transition: all var(--transition-fast);
+            z-index: 2;
+        }
+        
+        .form-input:focus + .form-icon {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.2);
+        }
+        
+        .error-message {
+            color: #ff5252;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            display: none;
+            padding-left: 10px;
+            text-align: left;
+            animation: shakeX 0.5s ease;
+        }
+        
+        @keyframes shakeX {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        /* Botones 3D realistas mejorados */
+        button {
+            all: unset;
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            position: relative;
+            border-radius: 999vw;
+            background-color: rgba(0, 0, 0, 0.6);
+            box-shadow: 
+                -0.15em -0.15em 0.15em -0.075em rgba(5, 5, 5, 0.25),
+                0.0375em 0.0375em 0.0675em 0 rgba(5, 5, 5, 0.1);
+            margin-bottom: 1rem;
+            perspective: 800px;
+            width: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.2s;
+        }
+        
+        button::after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            width: calc(100% + 0.3em);
+            height: calc(100% + 0.3em);
+            top: -0.15em;
+            left: -0.15em;
+            border-radius: inherit;
+            background: linear-gradient(-135deg,
+                rgba(5, 5, 5, 0.5),
+                transparent 20%,
+                transparent 100%);
+            filter: blur(0.025em);
+            opacity: 0.25;
+            mix-blend-mode: multiply;
+        }
+        
+        button .button-outer {
+            position: relative;
+            z-index: 1;
+            border-radius: inherit;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: box-shadow, transform;
+            box-shadow: 
+                0 0.08em 0.08em -0.01em rgba(5, 5, 5, 1),
+                0 0.02em 0.02em -0.01em rgba(5, 5, 5, 0.5),
+                0.2em 0.4em 0.15em -0.01em rgba(5, 5, 5, 0.25);
+        }
+        
+        button:hover .button-outer {
+            box-shadow: 0 0 0 0 rgba(5, 5, 5, 1), 0 0 0 0 rgba(5, 5, 5, 0.5),
+                0 0 0 0 rgba(5, 5, 5, 0.25);
+            transform: translateY(0.1em);
+        }
+        
+        button .button-inner {
+            position: relative;
+            z-index: 1;
+            border-radius: inherit;
+            padding: 0.8em 1.5em;
+            background-image: linear-gradient(135deg, 
+                rgba(120, 180, 255, 1) 0%,
+                rgba(143, 124, 255, 1) 50%,
+                rgba(194, 90, 230, 1) 100%);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: transform, filter, clip-path;
+            overflow: hidden;
+            clip-path: inset(0 0 0 0 round 999vw);
+            box-shadow:
+                0 0 0 0 inset rgba(5, 5, 5, 0.1),
+                -0.08em -0.08em 0.08em 0 inset rgba(5, 5, 5, 0.25),
+                0 0 0 0 inset rgba(5, 5, 5, 0.1),
+                0 0 0.05em 0.25em inset rgba(255, 255, 255, 0.25),
+                0.04em 0.08em 0.12em 0 inset rgba(255, 255, 255, 1),
+                0.15em 0.15em 0.15em inset rgba(255, 255, 255, 0.25),
+                -0.1em -0.3em 0.3em 0.15em inset rgba(5, 5, 5, 0.25);
+            transform-style: preserve-3d;
+        }
+        
+        /* Reflejo dinámico del botón */
+        button .button-inner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            20%, 100% { transform: translateX(100%); }
+        }
+        
+        button:hover .button-inner {
+            clip-path: inset(clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 999vw);
+            box-shadow:
+                0.12em 0.18em 0.06em 0 inset rgba(5, 5, 5, 0.75),
+                -0.035em -0.04em 0.06em 0.03em inset rgba(5, 5, 5, 0.5),
+                0.3em 0.3em 0.25em 0 inset rgba(5, 5, 5, 0.5),
+                0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.15),
+                0 0 inset rgba(255, 255, 255, 0.8),
+                0.15em 0.15em 0.15em inset rgba(255, 255, 255, 0.25),
+                -0.09em -0.15em 0.25em 0.12em inset rgba(5, 5, 5, 0.25);
+            filter: brightness(1.1);
+        }
+        
+        /* Estilo para el hundimiento localizado */
+        button.pressed .button-inner {
+            transform: var(--press-transform, scale(0.95));
+            transform-origin: var(--press-origin, center);
+            clip-path: inset(clamp(2px, 0.125em, 4px) clamp(2px, 0.125em, 4px) clamp(2px, 0.125em, 4px) clamp(2px, 0.125em, 4px) round 999vw);
+            box-shadow:
+                0.18em 0.22em 0.1em 0 inset rgba(5, 5, 5, 0.85),
+                -0.04em -0.05em 0.07em 0.04em inset rgba(5, 5, 5, 0.6),
+                0.35em 0.35em 0.3em 0 inset rgba(5, 5, 5, 0.6),
+                0 0 0.08em 0.6em inset rgba(255, 255, 255, 0.2),
+                0 0 0 0 inset rgba(255, 255, 255, 0.7),
+                0.16em 0.16em 0.16em inset rgba(255, 255, 255, 0.2),
+                -0.1em -0.16em 0.25em 0.14em inset rgba(5, 5, 5, 0.35);
+            transition: all 80ms ease-out;
+            filter: brightness(0.9);
+        }
+        
+        /* Efecto de memoria tras soltar el botón */
+        button.released .button-inner {
+            animation: buttonRelease 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        @keyframes buttonRelease {
+            0% { 
+                transform: var(--press-transform, scale(0.95)); 
+                transform-origin: var(--press-origin, center);
+                filter: brightness(0.95);
+            }
+            70% {
+                transform: scale(1.02);
+                filter: brightness(1.05);
+            }
+            100% { 
+                transform: scale(1); 
+                transform-origin: center;
+                filter: brightness(1);
+            }
+        }
+        
+        button.pressed .button-outer {
+            transform: translateY(0.1em) translateZ(-0.05em);
+            box-shadow: 0 0.04em 0.04em -0.01em rgba(5, 5, 5, 1),
+                0 0.01em 0.01em -0.01em rgba(5, 5, 5, 0.5),
+                0.1em 0.2em 0.1em -0.01em rgba(5, 5, 5, 0.25);
+            transition: all 80ms ease;
+        }
+        
+        button .button-inner span {
+            position: relative;
+            z-index: 4;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            transition: transform 250ms ease;
+            display: block;
+            will-change: transform;
+            -webkit-user-select: none; 
+            user-select: none;
+        }
+        
+        button:hover .button-inner span {
+            transform: scale(0.98);
+        }
+        
+        button.pressed .button-inner span {
+            transform: scale(0.95);
+        }
+        
+        /* Ondas de onda al hacer clic */
+        .press-echo {
+            position: absolute;
+            border-radius: inherit;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--echo-x) var(--echo-y), 
+                rgba(255,255,255,0.7) 0%, 
+                rgba(255,255,255,0) 50%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        @keyframes echo {
+            0% { opacity: 0.5; transform: scale(0.5); }
+            100% { opacity: 0; transform: scale(2.5); }
+        }
+        
+        /* Pantalla de celebración y timeline mejorados */
+        .celebration-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, rgba(124, 0, 255, 0.8), rgba(18, 3, 56, 0.95));
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            z-index: 20;
+            overflow-y: auto;
+            padding: 80px 20px 40px;
+            animation: fadeIn 1s ease;
+        }
+        
+        .success-icon {
+            font-size: 6rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            animation: successPulse 2s infinite;
+            filter: drop-shadow(0 0 15px rgba(0, 225, 255, 0.5));
+        }
+        
+        @keyframes successPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 225, 255, 0.5)); }
+            50% { transform: scale(1.15); filter: drop-shadow(0 0 25px rgba(0, 225, 255, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 225, 255, 0.5)); }
+        }
+        
+        /* Tarjeta de mensaje con efecto de vidrio y brillo */
+        .celebration-message {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.5),
+                inset 0 0 30px rgba(124, 0, 255, 0.05);
+            max-width: 800px;
+            width: 90%;
+            color: #333;
+            position: relative;
+            margin: 20px 0 40px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: messageIntro 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
+            z-index: 5; /* Para que esté por encima del confeti */
+        }
+        
+        @keyframes messageIntro {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* Borde brillante para la tarjeta de mensaje */
+        .celebration-message::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(124, 0, 255, 0.5),
+                rgba(255, 51, 153, 0.5),
+                rgba(0, 225, 255, 0.5),
+                rgba(124, 0, 255, 0.5));
+            z-index: -1;
+            border-radius: 26px;
+            filter: blur(5px);
+            opacity: 0.7;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% { opacity: 0.7; filter: blur(5px); }
+            100% { opacity: 0.9; filter: blur(7px); }
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .brand-logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .brand-logos img {
+            height: 50px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s, filter 0.3s;
+        }
+        
+        .brand-logos img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+        
+        .congrats-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .selected-text {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 10px 0 20px;
+            text-shadow: 0 2px 5px rgba(124, 0, 255, 0.2);
+        }
+        
+        .message-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .message-content p {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .message-content p::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+        }
+        
+        .message-footer {
+            font-style: italic;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .contact-info {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        /* Botones de redes sociales mejorados */
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: inherit;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+            border-radius: inherit;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-link:hover::before {
+            opacity: 0.7;
+        }
+        
+        /* Timeline con efectos 3D y animaciones */
+        .timeline-container {
+            margin-top: 20px;
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: timelineIntro 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s forwards;
+            z-index: 5; /* Para que esté por encima del confeti */
+        }
+        
+        @keyframes timelineIntro {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .timeline-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 50px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-title::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                rgba(255, 51, 153, 0), 
+                rgba(255, 51, 153, 1), 
+                rgba(255, 51, 153, 0));
+            bottom: -10px;
+            left: 10%;
+            border-radius: 3px;
+        }
+        
+        .timeline {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        
+        .timeline-item {
+            width: 100%;
+            margin-bottom: 100px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Puntos de la timeline con efectos 3D */
+        .timeline-dot {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 
+                0 0 0 4px rgba(255, 255, 255, 0.3), 
+                0 0 0 8px rgba(255, 255, 255, 0.1),
+                0 0 20px rgba(255, 255, 255, 0.5);
+            transition: all 0.5s;
+        }
+        
+        .timeline-item.active .timeline-dot {
+            background: var(--secondary);
+            transform: translateX(-50%) scale(1.2);
+            box-shadow: 
+                0 0 0 6px rgba(255, 255, 255, 0.5), 
+                0 0 30px rgba(255, 51, 153, 0.8);
+            animation: activeDotPulse 2s infinite;
+        }
+        
+        @keyframes activeDotPulse {
+            0%, 100% {
+                box-shadow: 
+                    0 0 0 6px rgba(255, 255, 255, 0.5), 
+                    0 0 30px rgba(255, 51, 153, 0.8);
+            }
+            50% {
+                box-shadow: 
+                    0 0 0 8px rgba(255, 255, 255, 0.6), 
+                    0 0 40px rgba(255, 51, 153, 1);
+            }
+        }
+        
+        .timeline-item.completed .timeline-dot {
+            background: var(--accent);
+            box-shadow: 0 0 30px rgba(0, 225, 255, 0.8);
+        }
+        
+        /* Tarjetas de la timeline con efecto de vidrio */
+        .timeline-content {
+            width: 40%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: all 0.5s;
+            transform: translateY(0) rotateY(0);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform-style: preserve-3d;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: calc(50% + 40px);
+            transform: rotateY(5deg);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: calc(50% + 40px);
+            transform: rotateY(-5deg);
+        }
+        
+        .timeline-item.active .timeline-content {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-10px) rotateY(0deg);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                0 0 30px rgba(255, 51, 153, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px) rotateY(0deg);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+        
+        .timeline-date {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .timeline-title-item {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .timeline-text {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            top: 15px;
+            color: white;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+            animation: iconFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-icon {
+            right: 20px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-icon {
+            left: 20px;
+        }
+        
+        /* Confeti mejorado */
+        canvas#confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 4; /* Por debajo del contenido principal */
+            opacity: 0.7; /* Reducir opacidad para mejor legibilidad */
+        }
+        
+        /* Animaciones mejoradas */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Media Queries mejorados */
+        @media (max-width: 992px) {
+            .welcome-title {
+                font-size: 2.2rem;
+            }
+            
+            .congrats-title {
+                font-size: 2.2rem;
+            }
+            
+            .timeline::before {
+                left: 40px;
+            }
+            
+            .timeline-dot {
+                left: 40px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+                transform: none !important;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content {
+                margin-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 80px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-icon,
+            .timeline-item:nth-child(even) .timeline-icon {
+                left: auto;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .login-card {
+                padding: 30px;
+            }
+            
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .selected-text {
+                font-size: 1.2rem;
+            }
+            
+            .congrats-title {
+                font-size: 2rem;
+            }
+            
+            .celebration-message {
+                padding: 30px;
+            }
+            
+            .timeline-title {
+                font-size: 1.8rem;
+            }
+            
+            .timeline-title-item {
+                font-size: 1.3rem;
+            }
+            
+            /* Ajustar confeti para pantallas pequeñas */
+            canvas#confetti {
+                opacity: 0.4;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .login-card {
+                padding: 20px;
+            }
+            
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+            
+            .congrats-title {
+                font-size: 1.8rem;
+            }
+            
+            .celebration-message {
+                padding: 20px;
+            }
+            
+            .social-links {
+                margin-top: 15px;
+            }
+            
+            .timeline-content {
+                padding: 20px;
+            }
+            
+            .timeline-dot {
+                width: 25px;
+                height: 25px;
+            }
+            
+            /* Ajustar para dispositivos táctiles */
+            button .button-inner {
+                padding: 0.7em 1.2em;
+            }
+            
+            button .button-inner span {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animaciones de fondo mejoradas -->
+    <div class="gradient-bg">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="gradients-container">
+            <div class="g1"></div>
+            <div class="g2"></div>
+            <div class="g3"></div>
+            <div class="g4"></div>
+            <div class="g5"></div>
+            <div class="interactive"></div>
+        </div>
+    </div>
+    
+    <!-- Animación de ondas -->
+    <div class="wave-container">
+        <div class="wave-animation">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+    </div>
+    
+    <!-- Contenedor principal -->
+    <div class="main-container">
+        <!-- Encabezado -->
+        <header id="header">
+            <img src="https://www-somostuyyovv-com.s3.us-west-2.amazonaws.com/public/media/logos/01JJW5SBXM6H8MX0DQ6G656S60.png" alt="Somos Tú y Yo" class="logo">
+        </header>
+        
+        <!-- Formulario de inicio de sesión mejorado -->
+        <div class="auth-container" id="loginScreen">
+            <div class="login-card">
+                <img src="https://www-somostuyyovv-com.s3.us-west-2.amazonaws.com/public/media/logos/01JJW5SBXM6H8MX0DQ6G656S60.png" alt="Somos Tú y Yo" class="login-logo">
+                <h1 class="welcome-title">Casting Oficial</h1>
+                <p class="welcome-subtitle">¡Ingresa tus datos para acceder a tu evaluación!</p>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="nombre" class="form-input" placeholder="Tu nombre completo" required>
+                        <i class="fas fa-user form-icon"></i>
+                        <div class="error-message" id="nombreError">Por favor ingresa tu nombre completo</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" id="clave" class="form-input" placeholder="Clave de acceso" required>
+                        <i class="fas fa-lock form-icon"></i>
+                        <div class="error-message" id="claveError">Clave incorrecta. Por favor verifica e intenta nuevamente.</div>
+                    </div>
+                    
+                    <button class="login-btn" type="submit">
+                        <div class="button-outer">
+                            <div class="button-inner">
+                                <span>Iniciar sesión</span>
+                                <div class="press-echo"></div>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pantalla de celebración mejorada -->
+    <div class="celebration-container" id="celebrationScreen">
+        <i class="fas fa-check-circle success-icon"></i>
+        
+        <div class="celebration-message">
+            <div class="message-header">
+                <div class="brand-logos">
+                    <img src="https://www-somostuyyovv-com.s3.us-west-2.amazonaws.com/public/media/logos/01JJW5SBXM6H8MX0DQ6G656S60.png" alt="Somos Tú y Yo">
+                    <img src="https://w2-venevision-com.s3.amazonaws.com/public/images/logo-venevision-bk-light_326x50.png" alt="Venevisión">
+                </div>
+            </div>
+            
+            <h1 class="congrats-title">¡FELICITACIONES, <span id="nombreUsuario"></span>!</h1>
+            <p class="selected-text">Tu talento ha sido pre-seleccionado para la siguiente fase</p>
+            
+            <div class="message-content">
+                <p>¡Nos complace informarte que has superado la primera etapa de selección! Tu presentación ha captado nuestra atención por tu extraordinario talento y el potencial que vemos en ti para formar parte de nuestro próximo gran proyecto.</p>
+                
+                <p>El equipo de producción de <strong>Somos Tú y Yo</strong> y <strong>Venevisión</strong> te invita formalmente al casting presencial que se realizará en Caracas, donde tendrás la oportunidad de brillar frente a nuestros directores artísticos y jueces oficiales.</p>
+                
+                <p>En los próximos días, recibirás en tu correo electrónico todos los detalles importantes sobre esta emocionante etapa: fechas específicas, horarios asignados, ubicación exacta y una guía completa con instrucciones sobre cómo prepararte para destacar en las pruebas de canto, baile y actuación.</p>
+            </div>
+            
+            <div class="message-footer">
+                <div class="contact-info">
+                    Para más información: <strong>casting@somostuyyovv.com</strong>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline mejorado -->
+        <div class="timeline-container">
+            <h2 class="timeline-title">Tu camino hacia el estrellato</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Abril 2025</div>
+                        <h3 class="timeline-title-item">Pre-selección</h3>
+                        <p class="timeline-text">Primera fase superada. Tu talento ha sido reconocido entre miles de aspirantes.</p>
+                        <i class="fas fa-check-circle timeline-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="timeline-item active">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Mayo 2025</div>
+                        <h3 class="timeline-title-item">Casting presencial</h3>
+                        <p class="timeline-text">Muestra tu talento en vivo frente a nuestros directores y jurado de Venevisión.</p>
+                        <i class="fas fa-star timeline-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Junio 2025</div>
+                        <h3 class="timeline-title-item">Selección final</h3>
+                        <p class="timeline-text">Anuncio de los talentos seleccionados para formar parte del elenco oficial.</p>
+                        <i class="fas fa-medal timeline-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Julio 2025</div>
+                        <h3 class="timeline-title-item">Firma de contrato</h3>
+                        <p class="timeline-text">Los seleccionados formalizarán su participación con un contrato profesional.</p>
+                        <i class="fas fa-file-signature timeline-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Agosto 2025</div>
+                        <h3 class="timeline-title-item">Inicio de grabaciones</h3>
+                        <p class="timeline-text">Comienza la producción oficial de la nueva temporada de Somos Tú y Yo.</p>
+                        <i class="fas fa-video timeline-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Canvas para confeti mejorado -->
+    <canvas id="confetti"></canvas>
+    
+    <!-- Scripts optimizados -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Referencias a elementos DOM
+            const loginForm = document.getElementById('loginForm');
+            const nombreInput = document.getElementById('nombre');
+            const claveInput = document.getElementById('clave');
+            const claveError = document.getElementById('claveError');
+            const loginScreen = document.getElementById('loginScreen');
+            const celebrationScreen = document.getElementById('celebrationScreen');
+            const nombreUsuario = document.getElementById('nombreUsuario');
+            const header = document.getElementById('header');
+            
+            // Precargar audio
+            const audioFallback = 'https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3';
+            const celebrationSound = new Audio(audioFallback);
+            
+            // Precargar recursos para mejor rendimiento
+            const precarga = new Image();
+            precarga.src = "https://www-somostuyyovv-com.s3.us-west-2.amazonaws.com/public/media/logos/01JJW5SBXM6H8MX0DQ6G656S60.png";
+            
+            // Efecto 3D para tarjeta de inicio de sesión
+            const loginCard = document.querySelector('.login-card');
+            if (loginCard) {
+                loginCard.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    // Cálculo para el efecto 3D basado en la posición del cursor
+                    const strengthX = 3; // Grados de rotación máximos
+                    const strengthY = 2; // Grados de rotación máximos
+                    const rotateY = strengthX * ((x - 50) / 50);
+                    const rotateX = strengthY * ((y - 50) / -50);
+                    
+                    this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    this.style.setProperty('--x', `${x}%`);
+                    this.style.setProperty('--y', `${y}%`);
+                });
+                
+                loginCard.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                });
+            }
+            
+            // Seguimiento del ratón para efectos interactivos
+            const interBubble = document.querySelector('.interactive');
+            let curX = 0;
+            let curY = 0;
+            let tgX = 0;
+            let tgY = 0;
+            
+            // Mover burbuja interactiva con el ratón - versión optimizada
+            function moveInteractiveBubble() {
+                curX += (tgX - curX) / 10;
+                curY += (tgY - curY) / 10;
+                
+                if (interBubble) {
+                    requestAnimationFrame(() => {
+                        interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+                    });
+                }
+                requestAnimationFrame(moveInteractiveBubble);
+            }
+            
+            // Seguimiento del ratón con throttling para mejor rendimiento
+            let lastMove = 0;
+            window.addEventListener('mousemove', (event) => {
+                const now = Date.now();
+                if (now - lastMove > 16) { // Aproximadamente 60fps
+                    tgX = event.clientX;
+                    tgY = event.clientY;
+                    lastMove = now;
+                }
+            });
+            
+            moveInteractiveBubble();
+            
+            // Efecto de botón 3D mejorado
+            document.querySelectorAll('button').forEach(button => {
+                const buttonInner = button.querySelector('.button-inner');
+                const pressEcho = button.querySelector('.press-echo');
+                
+                let isPressed = false;
+                let buttonRect = null;
+                let memoryTimer;
+                
+                // Seguimiento con memoria para efecto 3D
+                button.addEventListener('mousemove', function(e) {
+                    if (!buttonRect) buttonRect = button.getBoundingClientRect();
+                    
+                    // Posición relativa del cursor (0-100%)
+                    const x = ((e.clientX - buttonRect.left) / buttonRect.width) * 100;
+                    const y = ((e.clientY - buttonRect.top) / buttonRect.height) * 100;
+                    
+                    // Actualizar reflejo dinámico
+                    buttonInner.style.setProperty('--x', `${x}%`);
+                    buttonInner.style.setProperty('--y', `${y}%`);
+                    
+                    // Efecto de perspectiva 3D sutil
+                    const angleX = (y - 50) * 0.1;
+                    const angleY = (x - 50) * -0.1;
+                    buttonInner.style.transform = `perspective(500px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+                    
+                    if (isPressed) {
+                        updatePressEffect(e);
+                    }
+                });
+                
+                // Función mejorada para el efecto de hundimiento localizado
+                function updatePressEffect(e) {
+                    if (!buttonRect) buttonRect = button.getBoundingClientRect();
+                    
+                    // Cálculo de posición exacta
+                    const x = ((e.clientX - buttonRect.left) / buttonRect.width) * 100;
+                    const y = ((e.clientY - buttonRect.top) / buttonRect.height) * 100;
+                    
+                    // Origen de transformación basado en el clic
+                    const originX = `${x}%`;
+                    const originY = `${y}%`;
+                    
+                    // Matriz de transformación 3D mejorada
+                    const scaleBase = 0.94;
+                    const distanceFromCenterX = (x - 50) / 100;
+                    const distanceFromCenterY = (y - 50) / 100;
+                    
+                    const transform = `perspective(800px) 
+                                     scale(${scaleBase}) 
+                                     rotateX(${distanceFromCenterY * 5}deg) 
+                                     rotateY(${distanceFromCenterX * -5}deg)`;
+                    
+                    // Aplicar efectos con optimización
+                    requestAnimationFrame(() => {
+                        buttonInner.style.setProperty('--press-transform', transform);
+                        buttonInner.style.setProperty('--press-origin', `${originX} ${originY}`);
+                        
+                        // Efecto de eco visual
+                        if (pressEcho) {
+                            pressEcho.style.setProperty('--echo-x', `${x}%`);
+                            pressEcho.style.setProperty('--echo-y', `${y}%`);
+                            pressEcho.style.animation = 'echo 800ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+                        }
+                    });
+                }
+                
+                // Eventos táctiles mejorados
+                button.addEventListener('mousedown', function(e) {
+                    isPressed = true;
+                    buttonRect = button.getBoundingClientRect();
+                    this.classList.add('pressed');
+                    updatePressEffect(e);
+                    
+                    // Crear vibración táctil si está disponible
+                    if (navigator.vibrate) {
+                        navigator.vibrate(20);
+                    }
+                });
+                
+                button.addEventListener('mouseup', function() {
+                    isPressed = false;
+                    this.classList.remove('pressed');
+                    this.classList.add('released');
+                    
+                    clearTimeout(memoryTimer);
+                    memoryTimer = setTimeout(() => {
+                        this.classList.remove('released');
+                    }, 400);
+                    
+                    // Restablecer el botón
+                    buttonInner.style.transform = '';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    isPressed = false;
+                    this.classList.remove('pressed');
+                    buttonRect = null;
+                    buttonInner.style.transform = '';
+                });
+                
+                button.addEventListener('mouseenter', function() {
+                    buttonRect = null;
+                });
+                
+                // Soporte mejorado para dispositivos táctiles
+                button.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    isPressed = true;
+                    
+                    const touch = e.touches[0];
+                    buttonRect = button.getBoundingClientRect();
+                    
+                    this.classList.add('pressed');
+                    
+                    const simulatedEvent = {
+                        clientX: touch.clientX,
+                        clientY: touch.clientY
+                    };
+                    
+                    updatePressEffect(simulatedEvent);
+                    
+                    if (navigator.vibrate) {
+                        navigator.vibrate(20);
+                    }
+                });
+                
+                button.addEventListener('touchend', function() {
+                    isPressed = false;
+                    this.classList.remove('pressed');
+                    this.classList.add('released');
+                    
+                    clearTimeout(memoryTimer);
+                    memoryTimer = setTimeout(() => {
+                        this.classList.remove('released');
+                    }, 400);
+                    
+                    buttonInner.style.transform = '';
+                });
+                
+                button.addEventListener('touchmove', function(e) {
+                    if (isPressed) {
+                        const touch = e.touches[0];
+                        
+                        const simulatedEvent = {
+                            clientX: touch.clientX,
+                            clientY: touch.clientY
+                        };
+                        
+                        updatePressEffect(simulatedEvent);
+                    }
+                });
+            });
+            
+            // Animación de confeti mejorada (menos intrusiva)
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            let confettiArray = [];
+            let confettiAnimation;
+            
+            function setupCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            function randomRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+            
+            // Crear confeti con zona protegida para no cubrir el contenido
+            function createConfetti() {
+                const colors = ['#ff3399', '#7c00ff', '#00e1ff', '#ffff00', '#ff9900'];
+                
+                // Determinar si este confeti debe evitar la zona central
+                const shouldAvoidCenter = Math.random() > 0.5;
+                
+                // Calcular posición inicial
+                let x = randomRange(0, canvas.width);
+                let y = randomRange(-canvas.height, 0);
+                
+                // Si debe evitar el centro, asegurarse de que está a un lado
+                if (shouldAvoidCenter) {
+                    const centerX = canvas.width / 2;
+                    const centerWidth = canvas.width * 0.7; // 70% del ancho como zona central
+                    
+                    // Colocar a la izquierda o derecha de la zona central
+                    if (x > centerX - centerWidth/2 && x < centerX + centerWidth/2) {
+                        x = Math.random() > 0.5 ? 
+                            randomRange(0, centerX - centerWidth/2) : 
+                            randomRange(centerX + centerWidth/2, canvas.width);
+                    }
+                }
+                
+                return {
+                    x: x,
+                    y: y,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    size: randomRange(5, 15),
+                    speed: randomRange(1, 3),
+                    angle: randomRange(0, Math.PI * 2),
+                    rotation: randomRange(0, Math.PI * 2),
+                    rotationSpeed: randomRange(-0.1, 0.1),
+                    opacity: randomRange(0.6, 0.9)
+                };
+            }
+            
+            function startConfetti() {
+                setupCanvas();
+                
+                // Crear menos confeti para no saturar
+                for (let i = 0; i < 100; i++) {
+                    confettiArray.push(createConfetti());
+                }
+                
+                // Animar confeti
+                animateConfetti();
+                
+                // Añadir confeti gradualmente
+                setInterval(() => {
+                    if (confettiArray.length < 120) { // Límite máximo
+                        for (let i = 0; i < 5; i++) {
+                            confettiArray.push(createConfetti());
+                        }
+                    }
+                }, 2000);
+            }
+            
+            function animateConfetti() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Definir zona protegida central
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const centerWidth = canvas.width * 0.7;
+                const centerHeight = canvas.height * 0.6;
+                const centerTop = centerY - centerHeight/2;
+                const centerBottom = centerY + centerHeight/2;
+                const centerLeft = centerX - centerWidth/2;
+                const centerRight = centerX + centerWidth/2;
+                
+                confettiArray.forEach((confetti, index) => {
+                    // Ajustar opacidad basado en zona (más transparente en el centro)
+                    let drawOpacity = confetti.opacity;
+                    
+                    // Verificar si está en la zona protegida
+                    if (confetti.x > centerLeft && confetti.x < centerRight &&
+                        confetti.y > centerTop && confetti.y < centerBottom) {
+                        drawOpacity = confetti.opacity * 0.3; // Más transparente
+                    }
+                    
+                    ctx.globalAlpha = drawOpacity;
+                    ctx.fillStyle = confetti.color;
+                    ctx.beginPath();
+                    ctx.save();
+                    ctx.translate(confetti.x, confetti.y);
+                    ctx.rotate(confetti.rotation);
+                    
+                    // Dibujar formas diferentes de confeti
+                    if (index % 3 === 0) {
+                        // Rectángulo
+                        ctx.fillRect(-confetti.size / 2, -confetti.size / 2, confetti.size, confetti.size * 0.6);
+                    } else if (index % 3 === 1) {
+                        // Círculo
+                        ctx.beginPath();
+                        ctx.arc(0, 0, confetti.size / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else {
+                        // Triángulo
+                        ctx.beginPath();
+                        ctx.moveTo(0, -confetti.size / 2);
+                        ctx.lineTo(confetti.size / 2, confetti.size / 2);
+                        ctx.lineTo(-confetti.size / 2, confetti.size / 2);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+                    
+                    ctx.restore();
+                    
+                    // Actualizar posición con movimiento más natural
+                    confetti.y += confetti.speed;
+                    confetti.x += Math.sin(confetti.angle) * 0.5;
+                    confetti.rotation += confetti.rotationSpeed;
+                    
+                    // Simular resistencia al aire
+                    confetti.speed = Math.min(confetti.speed * 1.02, 4);
+                    
+                    // Si el confeti está fuera de la pantalla, reposicionarlo
+                    if (confetti.y > canvas.height) {
+                        confettiArray[index] = createConfetti();
+                    }
+                });
+                
+                ctx.globalAlpha = 1;
+                confettiAnimation = requestAnimationFrame(animateConfetti);
+            }
+            
+            // Parar confeti cuando no sea visible
+            function stopConfetti() {
+                if (confettiAnimation) {
+                    cancelAnimationFrame(confettiAnimation);
+                    confettiAnimation = null;
+                }
+            }
+            
+            // Ajustar tamaño del canvas cuando cambia el tamaño de la ventana
+            window.addEventListener('resize', setupCanvas);
+            
+            // Optimización: Pausar animación cuando no es visible
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden && confettiAnimation) {
+                    stopConfetti();
+                } else if (!document.hidden && !confettiAnimation && document.getElementById('celebrationScreen').style.display === 'flex') {
+                    animateConfetti();
+                }
+            });
+            
+            // Efectos de scroll en encabezado
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Manejar el envío del formulario con feedback mejorado
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const nombre = nombreInput.value.trim();
+                const clave = claveInput.value;
+                
+                // Animación de carga
+                const loginBtn = document.querySelector('.login-btn');
+                loginBtn.classList.add('active');
+                loginBtn.querySelector('span').textContent = 'Verificando...';
+                
+                // Simulación de verificación con servidor
+                setTimeout(() => {
+                    // Verificar clave (en producción usar servidor con hash y seguridad)
+                    if (clave === 'SomosTYY1451212') {
+                        // Mostrar celebración con transición
+                        loginScreen.style.opacity = '0';
+                        loginScreen.style.transform = 'scale(0.95)';
+                        loginScreen.style.transition = 'all 0.5s ease-out';
+                        
+                        setTimeout(() => {
+                            loginScreen.style.display = 'none';
+                            celebrationScreen.style.display = 'flex';
+                            nombreUsuario.textContent = nombre.split(' ')[0]; // Solo el primer nombre
+                            
+                            // Iniciar confeti
+                            startConfetti();
+                            
+                            // Reproducir sonido con interacción de usuario
+                            try {
+                                celebrationSound.volume = 0.3;
+                                celebrationSound.play().catch(e => console.log('Audio requiere interacción del usuario'));
+                                
+                                // Botón para reproducir música
+                                const soundBtn = document.createElement('button');
+                                soundBtn.innerHTML = `
+                                    <div class="button-outer">
+                                        <div class="button-inner">
+                                            <span><i class="fas fa-music"></i> Reproducir música</span>
+                                            <div class="press-echo"></div>
+                                        </div>
+                                    </div>`;
+                                soundBtn.style.position = 'fixed';
+                                soundBtn.style.bottom = '20px';
+                                soundBtn.style.right = '20px';
+                                soundBtn.style.zIndex = '100';
+                                soundBtn.style.width = 'auto';
+                                
+                                soundBtn.addEventListener('click', function() {
+                                    celebrationSound.play();
+                                    this.remove();
+                                });
+                                
+                                document.body.appendChild(soundBtn);
+                            } catch (error) {
+                                console.log('Error al reproducir audio', error);
+                            }
+                            
+                            // Animación de timeline con efecto escalonado
+                            document.querySelectorAll('.timeline-item').forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.style.opacity = "1";
+                                    item.style.transform = index % 2 === 0 ? 
+                                        "translateY(0) rotateY(5deg)" : 
+                                        "translateY(0) rotateY(-5deg)";
+                                }, 500 + index * 300);
+                            });
+                        }, 500);
+                        
+                    } else {
+                        // Mostrar error con animación mejorada
+                        loginBtn.classList.remove('active');
+                        loginBtn.querySelector('span').textContent = 'Iniciar sesión';
+                        
+                        claveError.style.display = 'block';
+                        claveInput.classList.add('error');
+                        claveInput.focus();
+                        
+                        // Efecto de vibración en el input
+                        claveInput.style.animation = 'none';
+                        setTimeout(() => {
+                            claveInput.style.animation = 'shakeX 0.5s cubic-bezier(.36,.07,.19,.97)';
+                        }, 10);
+                        
+                        // Feedback táctil de error
+                        if (navigator.vibrate) {
+                            navigator.vibrate([50, 30, 50]);
+                        }
+                    }
+                }, 800); // Simular tiempo de carga
+            });
+            
+            // Limpiar mensaje de error al escribir
+            claveInput.addEventListener('input', function() {
+                claveError.style.display = 'none';
+                claveInput.classList.remove('error');
+            });
+            
+            // Interactividad mejorada para la línea de tiempo
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active') && !this.classList.contains('completed')) {
+                        // Efecto de iluminación al hover
+                        this.querySelector('.timeline-content').style.boxShadow = 
+                            '0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 30px rgba(0, 225, 255, 0.3)';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active') && !this.classList.contains('completed')) {
+                        this.querySelector('.timeline-content').style.boxShadow = '';
+                    }
+                });
+                
+                // Añadir efecto de clic para ver más información
+                item.addEventListener('click', function() {
+                    // Efecto visual de pulsación
+                    this.querySelector('.timeline-content').style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.querySelector('.timeline-content').style.transform = '';
+                    }, 200);
+                    
+                    // Aquí se podría añadir un modal o expandir información
+                });
+            });
+        });
+    </script>
+</body>
+</html>
